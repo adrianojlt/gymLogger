@@ -29,11 +29,24 @@ public class GymController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String url = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/") + 1, request.getRequestURL().length());
-		String controller = url.substring( 0 , url.indexOf("."));
+		// gather parameter specific information
+		// RequestHelper helper = new RequestHelper(request);
+		// Command cmdHelper = helper.getCommand();
+		// page = cmdHelper.execute(request,response);
 		
-		String action = request.getParameter("action");
-		String view;
+		try {
+			String url = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/") + 1, request.getRequestURL().length());
+			String controller = url.substring( 0 , url.indexOf("."));
+			String action = request.getParameter("action");
+			String view = "jsp/list.jsp";
+			this.dispatch(request, response, view);
+		}
+		catch(StringIndexOutOfBoundsException e) {
+			
+		}
+		catch(Exception e) {
+			
+		}
 		
 		// Action action = ActionFactory.getAction(request);
 		

@@ -8,18 +8,22 @@ public class AbstractController implements Controller {
     protected String page;
 
 	@Override
-	public void execute() {
-		
-	}
-
-	@Override
 	public void init(HttpServletRequest request) {
 		this.request = request;
 	}
 
 	@Override
-	public String getReturnPage() {
+	public String getPage() {
 		return this.page;
+	}
+
+	@Override
+	public void execute() {
+		
+	}
+	
+	public HttpServletRequest getRequest() {
+		return this.request;
 	}
 
 }
