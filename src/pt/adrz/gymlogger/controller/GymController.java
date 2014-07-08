@@ -29,8 +29,8 @@ public class GymController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		testMethod01(request, response);
-		//testMethod02(request, response);
+		//testMethod01(request, response);
+		testMethod02(request, response);
 		
 	}
 	
@@ -58,7 +58,15 @@ public class GymController extends HttpServlet {
 	}
 
 	protected void testMethod02(HttpServletRequest request, HttpServletResponse response) {
-		
+
+		String view = "jsp/list.jsp";
+
+		try {
+			this.dispatch(request, response, view);
+		}
+		catch (Exception e) {
+			
+		}
 	}
 
 	/**

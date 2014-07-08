@@ -10,7 +10,7 @@
 
 <servlet-mapping>
 	<servlet-name>GymController</servlet-name>
-	<url-pattern>/main</url-pattern>
+	<url-pattern>/gym/*</url-pattern>
 </servlet-mapping>
 
 
