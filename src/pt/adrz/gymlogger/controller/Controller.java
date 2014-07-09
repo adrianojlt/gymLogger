@@ -6,5 +6,5 @@ public interface Controller {
 	
 	public void execute();
 	public void init(HttpServletRequest request);
-	public String getReturnPage();
+	public String getPage();
 }

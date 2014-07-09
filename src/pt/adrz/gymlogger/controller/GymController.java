@@ -29,12 +29,17 @@ public class GymController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// call a validation component declaratively
+		
+		// declaratively invoke a reqeust processing component, to call a Model component
+		
+		// dispatch to the view JSP declaratively
+		
 		String url = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/") + 1, request.getRequestURL().length());
 		String controller = url.substring( 0 , url.indexOf("."));
-		
-		String action = request.getParameter("action");
-		String view;
-		
+		System.out.println(controller);
+		//String action = request.getParameter("action");
+		//String view;
 		// Action action = ActionFactory.getAction(request);
 		
 	}
