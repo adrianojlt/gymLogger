@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class GymController
  * http://www.java-only.com/LoadTutorial.javaonly?id=13
  */
-@WebServlet("/GymController")
+//@WebServlet("/GymController")
 public class GymController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,19 +29,44 @@ public class GymController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// call a validation component declaratively
+		//testMethod01(request, response);
+		testMethod02(request, response);
 		
-		// declaratively invoke a reqeust processing component, to call a Model component
+	}
+	
+	protected void testMethod01(HttpServletRequest request, HttpServletResponse response) {
+		// gather parameter specific information
+		// RequestHelper helper = new RequestHelper(request);
+		// Command cmdHelper = helper.getCommand();
+		// page = cmdHelper.execute(request,response);
 		
-		// dispatch to the view JSP declaratively
+		try {
+			String url = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/") + 1, request.getRequestURL().length());
+			String controller = url.substring( 0 , url.indexOf("."));
+			String action = request.getParameter("action");
+			String view = "jsp/list.jsp";
+			this.dispatch(request, response, view);
+		}
+		catch(StringIndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		String url = request.getRequestURL().substring(request.getRequestURL().lastIndexOf("/") + 1, request.getRequestURL().length());
-		String controller = url.substring( 0 , url.indexOf("."));
-		System.out.println(controller);
-		//String action = request.getParameter("action");
-		//String view;
 		// Action action = ActionFactory.getAction(request);
-		
+	}
+
+	protected void testMethod02(HttpServletRequest request, HttpServletResponse response) {
+
+		String view = "jsp/list.jsp";
+
+		try {
+			this.dispatch(request, response, view);
+		}
+		catch (Exception e) {
+			
+		}
 	}
 
 	/**
