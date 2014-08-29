@@ -8,6 +8,11 @@
   <artifactId>gymlogger</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <description>gymlogger</description>
+  
+  <properties>
+    <jersey.version>2.11</jersey.version>
+  </properties>
 
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -30,6 +35,15 @@
       </plugin>
     </plugins>
   </build>
+  
+  <repositories>
+  	<repository>
+	    <id>snapshot-repository.java.net</id>
+	    <name>Java.net Snapshot Repository for Maven</name>
+	    <url>https://maven.java.net/content/repositories/snapshots/</url>
+	    <layout>default</layout>
+	</repository>
+  </repositories>
 
   <dependencies>
   
@@ -40,7 +54,31 @@
   		<version>1.2</version>
   	</dependency>
   	
-  	<!-- Others -->
+  	<!-- Jersey 2.x -->
+  	<dependency>
+    	<groupId>org.glassfish.jersey.containers</groupId>
+    	<!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core"  -->
+    	<artifactId>jersey-container-servlet</artifactId> 
+    	<!-- <artifactId>jersey-container-grizzly2-servlet</artifactId> -->
+    	<version>${jersey.version}</version>
+	</dependency>
+	
+  	<!-- JSON Library -->
+  	<!--
+	<dependency>
+		<groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-moxy</artifactId>
+    	<version>2.11</version>
+	</dependency>
+	-->
+
+	<dependency>
+    	<groupId>org.glassfish.jersey.media</groupId>
+    	<artifactId>jersey-media-json-jackson</artifactId>
+    	<version>2.11</version>
+	</dependency>
+  	
+  	<!-- MySQL Connector -->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
@@ -52,8 +90,6 @@
       <artifactId>log4j</artifactId>
       <version>1.2.14</version>
     </dependency>
-    
-   
     
   </dependencies>
 

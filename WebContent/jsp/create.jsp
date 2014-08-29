@@ -18,6 +18,10 @@
 	</div>
 	
 	<div class="content">create</div>
+	
+	<form action="rest/workouts" method="GET">
+	   <input type="submit" value="submit" />
+	</form>
 
 </body>
 
