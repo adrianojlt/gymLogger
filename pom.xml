@@ -72,14 +72,19 @@
     	<version>${jersey.version}</version>
 	</dependency>
 	
-  	<!-- JSON Library -->
-  	<!--
+	<!-- RESTLET -->
 	<dependency>
-		<groupId>org.glassfish.jersey.media</groupId>
-        <artifactId>jersey-media-moxy</artifactId>
-    	<version>2.11</version>
+	    <groupId>org.restlet.jse</groupId>
+	    <artifactId>org.restlet</artifactId>
+	    <version>${version.lib.restlet}</version>
 	</dependency>
-	-->
+     
+	<!-- RESTLET Modules -->
+	<dependency>
+	    <groupId>org.restlet.jse</groupId>
+	    <artifactId>org.restlet.ext.jackson</artifactId>
+	    <version>${version.lib.restlet}</version>
+	</dependency>
 
 	<dependency>
     	<groupId>org.glassfish.jersey.media</groupId>
