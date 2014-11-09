@@ -14,8 +14,8 @@ public class Repetition implements Serializable{
 	private Float weight;
 	private Integer num;
 
-	private Exercice exercice;
 	private Workout workout;
+	private Exercice exercice;
 
 	public Integer getId() { return id; }
 	public void setId(Integer id) { this.id = id; }

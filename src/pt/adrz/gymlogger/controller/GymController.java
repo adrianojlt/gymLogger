@@ -71,7 +71,7 @@ public class GymController extends HttpServlet {
 		
 		//DAOExerciceFactory data = DAOExerciceFactory.getDAOFactory(DAOExerciceFactory.MYSQL_JDBC);
 		WorkoutDAO workoutDAO = new WorkoutDAOJDBC();
-		List<Workout> workouts = workoutDAO.listAllWorkouts();
+		List<Workout> workouts = workoutDAO.getAllWorkouts();
 
 		String view = "jsp/listExercice.jsp";
 

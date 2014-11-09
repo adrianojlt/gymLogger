@@ -13,8 +13,8 @@ public class Exercice implements Serializable {
 	private String name;
 	private String nome;
 
-	private List<Repetition> repetitions;
 	private MuscleGroup muscleGroup;
+	private List<Repetition> repetitions;
 
 	public void setId(int id) { this.id = id; }
 	public int getId() { return this.id; }

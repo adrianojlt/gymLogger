@@ -1,6 +1,7 @@
 package pt.adrz.gymlogger.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,11 @@ public class ConnectionFactory {
 	
 	private static final String CONTEXT_STRING = "java:/comp/env";
 	private static final String DATASOURCE_STRING = "jdbc/gymlogger";
+	
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/";
+	private static final String DATABASE = "gymlogger";
+	private static final String USER = "root";
+	private static final String PASS = "";
 	
 	private static ConnectionFactory instance = null;
 	
@@ -38,9 +44,14 @@ public class ConnectionFactory {
 	}
 	
 	public static Connection getConnection() throws SQLException {
-		if ( instance == null ) { instance = new ConnectionFactory(); }
-		return src.getConnection();
+		//if ( instance == null ) { instance = new ConnectionFactory(); }
+		//return src.getConnection();
+		
+		// conn to use without web server
+		return DriverManager.getConnection(DB_URL + DATABASE, USER, PASS);
 	}
+	
+	//public static Connection getConn() throws SQLException { }
 	
 	public static void close(ResultSet rs) {
 		if ( rs == null) return;

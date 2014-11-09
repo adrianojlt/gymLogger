@@ -31,7 +31,7 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 	//private RepetitionDAO repetitionData;
 
 	@Override
-	public List<Workout> listAllWorkouts() {
+	public List<Workout> getAllWorkouts() {
 
 		List<Workout> workouts = new ArrayList<Workout>();
 		Connection conn = null;
