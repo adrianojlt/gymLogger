@@ -1,6 +1,7 @@
+/target
 /.settings
 /bin
 *.class
 /img/*.db
 /.classpath
-/target
+
