@@ -8,19 +8,26 @@
 		<servlet-class>pt.adrz.gymlogger.controller.GymController</servlet-class>
 	</servlet>
 	
+    <!--
 	<servlet>
 		<servlet-name>jersey-serlvet</servlet-name>
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
 		     <param-name>javax.ws.rs.Application</param-name>
 		     <param-value>pt.adrz.gymlogger.GymloggerRestApplication</param-value>
-		     <!--
+
 		     <param-name>jersey.config.server.provider.packages</param-name>
 		     <param-value>pt.adrz.gymlogger.service</param-value>
-		     -->
+
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>jersey-serlvet</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+    -->
 	
 	<servlet-mapping>
 		<servlet-name>GymController</servlet-name>
@@ -28,12 +35,9 @@
 	</servlet-mapping>
 	
 	
-	<servlet-mapping>
-		<servlet-name>jersey-serlvet</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
    
 	<!-- Resources -->
+	<!-- no DB pool in DEV ...
 	<resource-ref>
 	  <description>DB Connection Pool</description>
 	  <res-ref-name>jdbc/gymlogger</res-ref-name>
@@ -41,6 +45,7 @@
 	  <res-auth>Container</res-auth>
 	  <res-sharing-scope>Shareable</res-sharing-scope>
 	</resource-ref>
+	-->
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
