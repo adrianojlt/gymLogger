@@ -26,7 +26,7 @@ public class ConnectionFactory {
 	
 	private static DataSource src;
 	
-	public ConnectionFactory() {
+	private ConnectionFactory() {
 
 		try {
 			Context initContext = new InitialContext();
