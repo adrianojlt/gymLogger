@@ -18,17 +18,23 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
     <!-- CSS Styles -->
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 
 </head>
 
-<body>
+<body ng-app="gymApp" ng-controller="MainController">
 
 	<!--[if lt IE 7]>
 	<p class="browsehappy">You are using an <strong>outdated</strong> browser.</p>
 	<![endif]-->
 
-    
+	<!-- Our Website Content Goes Here -->
+	<div ng-include='"app/partials/header.html"'></div>
+	<div ng-view autoscroll="true"></div>
+	<!--
+	<div ui-view></div>
+	-->
+	<!-- <div ng-include='"/admin/app/layout/footer.html"'></div> -->
 
 	<!-- jquery and bootstrap scripts -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -36,7 +42,15 @@
 	
 	<!-- Angular Framework -->
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+	<!--
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.min.js"></script>
+	-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"></script>
+	
+	<!-- Website Javascripts -->
+    <script src="app/app.js"></script>
+    <script src="app/config.js"></script>
+    <script src="app/controllers/main.js"></script>
 
 </body>
 </html>
