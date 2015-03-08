@@ -1,7 +1,5 @@
 package pt.adrz.gymlogger.resources;
 
-import java.util.List;
-
 import org.restlet.data.Status;
 import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.representation.EmptyRepresentation;

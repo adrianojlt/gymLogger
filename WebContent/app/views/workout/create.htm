@@ -1,0 +1,139 @@
+<div class="container">
+	
+	<div class="row page-header">
+	
+	    <div class="col-md-2">
+	        <div class="form-group col-md-12">
+	        <input type="submit" ng-click="save()" name="submitButton" value="Save"   class="btn btn-primary" />
+	        <input type="submit" ng-click="cancel()" name="submitButton" value="Cancel" class="btn btn-default" />
+	        </div>
+	    </div>
+	
+	    <div class='col-md-10'>
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12">
+	            <div class="input-group">
+	                <input type="text" class="form-control" name="date_start" placeholder="Inicio (AAAA/MM/DD)"
+	                    ng-model="dateStart"
+	                    datepicker-popup="yyyy-MM-dd" 
+	                    datepicker-options="dateOptions" 
+	                    max-date="new"
+	                    is-open="opened"
+	                    ng-click="opened = !opened"
+	                    ng-required="true" />
+	                <!--
+	                <button type="button" class="btn btn-default" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
+	                -->
+	                <span class="input-group-addon" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></span>
+	            </div>
+	        </div>
+	
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12">
+	          <div class="input-group">
+	                <input ng-model="workout.hourStart" type="text" class="form-control" name="hour_start" value="" placeholder="hora inicio (HH:MM)"/>
+	                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+	          </div>
+	        </div>
+	
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12 ">
+	            <div class="input-group">
+	                <input ng-model="workout.dateEnd" type="text" class="form-control" name="date_end" value="" placeholder="Fim (AAAA/MM/DD)"/>
+	                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+	            </div>
+	        </div>
+	
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12">
+	            <div class="input-group">
+	                <input ng-model="workout.hourEnd" type="text" class="form-control" name="hour_end" value="" placeholder="hora fim (HH:MM)"/>
+	                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+	            </div>
+	        </div>
+	    </div>
+	
+	</div>
+	
+	<div class="row" ng-repeat="exercise in workout track by $index" ng-form="exerciseForm">
+	          
+	    <div class='col-md-6'>
+	
+	        <div class='col-md-6 col-sm-4'>
+	            <label class='control-label'>Grupo</label>
+	            <select class="form-control input-md" name="group"
+	                ng-model="exercise.selectedGroup" 
+	                ng-options="group.name for group in musclegroups track by group.id"
+	                ng-change="muscleGroupChanged(exercise);">
+	                    <option value="">Muscle Group</option>
+	            </select>
+	        </div>
+	
+	        <div class='col-md-6 col-sm-4'>
+	            <label class='control-label'>Exercicio</label>
+	            <select class="form-control input" name="exercise"
+	                ng-model="exercise.selectedExercise" 
+	                ng-options="exec.name for exec in exercise.selectedGroup.exercises track by exec.id"
+	                ng-change="exerciseChanged(exercise.selectedExercise);">
+	                    <option value="">Exercise Name</option>
+	            </select>
+	        </div>
+	
+	        <div class='col-md-1 col-sm-2'>
+	            <button ng-click="removeExerciseInput($index);" type="button" class="btn btn-default btn-sm" style="margin-top: 25px;">
+	                <span class="glyphicon glyphicon-minus"></span>
+	            </button>
+	        </div>
+	
+	        <div class='col-md-1 col-sm-2'>
+	            <button ng-click="addExerciseInput($index);" type="button" class="btn btn-default btn-sm" style="margin-top: 25px;">
+	                <span class="glyphicon glyphicon-plus"></span>
+	            </button>
+	        </div>
+	
+	    </div>
+	
+	    <div class='col-md-6 exercise'>
+	
+	        <div ng-repeat="repetition in workout[$index].repetitions track by $index" ng-form="repetitionForm" class="row row-exercise">
+	
+	            <div class='col-md-1'>
+	                <button ng-click="removeRepetitionInput($parent.$index,$index);" type="button" class="btn btn-default btn-sm" value="addRepetition" style="margin-top: 25px;">
+	                    <span class="glyphicon glyphicon-minus"></span>
+	                </button>
+	            </div>
+	
+	            <div class='col-xs-4' ng-class="{'has-error':repetitionForm.weight.$invalid , 'has-success':repetitionForm.weight.$valid }">
+	                <label class='control-label'>Peso</label>
+	                <input class='form-control' name="weight" placeholder='insert weight' size='3' type='text'
+	                    ng-model="repetition.weight"
+	                    required>
+	            </div>
+	
+	            <div class='col-xs-4' ng-class="{'has-error':repetitionForm.rep.$invalid , 'has-success':repetitionForm.rep.$valid }">
+	                <label class='control-label text-center'>Reps</label>
+	                <input class='form-control' name="rep" placeholder='number of repetitions' size='2' type='text'
+	                    ng-model="repetition.rep"
+	                    required> 
+	            </div>
+	
+	            <div class='col-md-2'>
+	                <button ng-click="addRepetitionInput($parent.$index);" type="button" class="btn btn-default btn-sm" value="addRepetition" style="margin-top: 25px;">
+	                    <span class="glyphicon glyphicon-plus"></span>
+	                </button>
+	            </div>
+	        
+	        </div>
+	
+	    </div>
+	
+	    <div class='col-md-12'>
+	        <hr>
+	    </div>
+	
+	</div>
+	
+	<pre> {{workout|json}}</pre>
+	<pre> {{workout|json}}</pre>
+	
+	<!--
+	<pre> {{repetitions|json}}</pre>
+	-->
+
+</div>

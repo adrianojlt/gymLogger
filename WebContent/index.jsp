@@ -18,7 +18,7 @@
 	<h4>hello gymlogger</h4>
 	<ul>
 	   <li><a href="home.jsp">home.jsp</a></li>
-	   <li><a href="angular.html">angular</a></li>
+	   <li><a href="index.html">angular</a></li>
 	   <li><a href="rest/workouts">REST workouts</a></li>
 	   <li><a href="rest/workouts">REST workouts repetitons</a></li>
 	   <li><a href="rest/exercices">REST exercices</a></li>
