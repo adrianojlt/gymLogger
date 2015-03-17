@@ -4,10 +4,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>pt.adrz</groupId>
+  <groupId>gymlogger</groupId>
   <artifactId>gymlogger</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <name>gymlogger</name>
   <description>gymlogger</description>
   
   <properties>
@@ -16,8 +17,11 @@
   </properties>
 
   <build>
+
     <sourceDirectory>src</sourceDirectory>
+
     <plugins>
+
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
@@ -26,6 +30,7 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>2.3</version>
@@ -34,17 +39,21 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+
     </plugins>
+
   </build>
   
   <repositories>
   
+  <!--
   	<repository>
 	    <id>snapshot-repository.java.net</id>
 	    <name>Java.net Snapshot Repository for Maven</name>
 	    <url>https://maven.java.net/content/repositories/snapshots/</url>
 	    <layout>default</layout>
 	</repository>
+	-->
 	
     <repository>
 	    <id>maven-restlet</id>
@@ -57,24 +66,43 @@
   <dependencies>
   
   	<!-- Java EE -->
-  	 <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
+  	<dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>javax.servlet-api</artifactId>
+	    <version>3.0.1</version>
+	    <scope>provided</scope>
+	</dependency>
   	<dependency>
   		<groupId>javax.servlet</groupId>
   		<artifactId>jstl</artifactId>
   		<version>1.2</version>
   	</dependency>
+	<dependency>
+		<groupId>javax.servlet.jsp</groupId>
+		<artifactId>javax.servlet.jsp-api</artifactId>
+		<version>2.2.1</version>
+		<scope>provided</scope>
+    </dependency>
+	<dependency>
+	    <groupId>javax.el</groupId>
+	    <artifactId>javax.el-api</artifactId>
+	    <version>2.2.2</version>
+	    <scope>provided</scope>
+	</dependency>
+	
+	<!--
+	<dependency>
+        <groupId>org.apache.tomcat</groupId>
+        <artifactId>tomcat-servlet-api</artifactId>
+        <version>7.0.42</version>
+        <scope>provided</scope>
+    </dependency>
+    -->
   	
   	<!-- Jersey 2.x -->
   	<dependency>
     	<groupId>org.glassfish.jersey.containers</groupId>
-    	<!-- if your container implements Servlet API older than 3.0, use "jersey-container-servlet-core"  -->
     	<artifactId>jersey-container-servlet</artifactId> 
-    	<!-- <artifactId>jersey-container-grizzly2-servlet</artifactId> -->
     	<version>${jersey.version}</version>
 	</dependency>
 	
@@ -83,9 +111,30 @@
 	    <groupId>org.restlet.jse</groupId>
 	    <artifactId>org.restlet</artifactId>
 	    <version>${version.lib.restlet}</version>
+	    <!--
+	    <version>2.2.1</version>
+	    -->
 	</dependency>
+	
+	<!-- RESTLET Integration with Servlet API. -->
+    <dependency>
+        <groupId>org.restlet.jee</groupId>
+        <artifactId>org.restlet.ext.servlet</artifactId>
+        <version>${version.lib.restlet}</version>
+	    <!--
+	    <version>2.2.1</version>
+        -->
+    </dependency>
      
 	<!-- RESTLET Modules -->
+	<!--
+	<dependency>
+       <groupId>org.restlet.jse</groupId>
+       <artifactId>org.restlet.ext.simple</artifactId>
+	    <version>${version.lib.restlet}</version>
+    </dependency>
+    -->
+
 	<dependency>
 	    <groupId>org.restlet.jse</groupId>
 	    <artifactId>org.restlet.ext.jackson</artifactId>
