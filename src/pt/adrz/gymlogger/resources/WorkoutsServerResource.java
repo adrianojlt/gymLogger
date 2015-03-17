@@ -13,6 +13,7 @@ import org.restlet.resource.Post;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
+import pt.adrz.gymlogger.dao.FactoryGym;
 import pt.adrz.gymlogger.dao.WorkoutDAO;
 import pt.adrz.gymlogger.dao.WorkoutDAOJDBC;
 import pt.adrz.gymlogger.model.Repetition;
@@ -20,7 +21,7 @@ import pt.adrz.gymlogger.model.Workout;
 
 public class WorkoutsServerResource extends ServerResource {
 	
-	private WorkoutDAO workoutsDAO = new WorkoutDAOJDBC();
+	private WorkoutDAO workoutsDAO = FactoryGym.getWorkoutDAO( FactoryGym.STORAGE_TYPE.MYSQL_JDBC );
 
 	@Override
 	protected void doInit() throws ResourceException {
@@ -32,10 +33,11 @@ public class WorkoutsServerResource extends ServerResource {
 
 		Representation rep = new EmptyRepresentation();
 		Status status = null;
+		List<Workout> workouts;
 
 		try {
 
-			List<Workout> workouts = workoutsDAO.getAllWorkouts();
+			workouts = workoutsDAO.getAllWorkouts();
 			JacksonRepresentation<List<Workout>> jAll = new JacksonRepresentation<List<Workout>>(workouts); 
 			rep = jAll;
 

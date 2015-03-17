@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pt.adrz.gymlogger.model.Exercice;
 import pt.adrz.gymlogger.model.Repetition;
 import pt.adrz.gymlogger.model.Workout;
 
@@ -18,15 +17,15 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		"SELECT id , start , end FROM workout ORDER BY id DESC;";
 
 	private static final String QUERY_GET_WORKOUTS_BY_ID = 
-		"SELECT id , start , end FROM workout where id = ?;";
+		"SELECT id , start , end FROM workout WHERE id = ?;";
 
 	private static final String QUERY_GET_ALL_WORKOUTS = 
-		"select w.id as id_work , r.id as id_rep , w.start , w.end , g.name as group_name , r.id_exercice , e.name as exercice_name , r.weight , r.num  "
-		+ "from workout w "
-		+ "inner join repetition 	r on r.id_workout 	= w.id "
-		+ "inner join exercice 	e on e.id 			= r.id_exercice "
-		+ "inner join musclegroup	g on g.id 			= e.id_musclegroup "
-		+ "where w.id > 0 order by id_rep desc;";
+		"SELECT w.id AS id_work , r.id AS id_rep , w.start , w.end , g.name AS group_name , r.id_exercice , e.name AS exercice_name , r.weight , r.num  "
+		+ "FROM workout w "
+		+ "INNER JOIN repetition r ON r.id_workout = w.id "
+		+ "INNER JOIN exercice e ON e.id = r.id_exercice "
+		+ "INNER JOIN musclegroup g ON g.id = e.id_musclegroup "
+		+ "WHERE w.id > 0 ORDER BY id_rep DESC;";
 
 	//private RepetitionDAO repetitionData;
 

@@ -6,7 +6,7 @@ import pt.adrz.gymlogger.model.MuscleGroup;
 
 public interface MuscleGroupDAO {
 	
-	public List<MuscleGroup> getAllMuscleGroup();
+	public List<MuscleGroup> getMuscleGroups();
 	public MuscleGroup getMuscleGroup(int id);
 	// add ... 
 	// delete ...

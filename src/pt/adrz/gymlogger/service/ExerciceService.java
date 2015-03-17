@@ -11,15 +11,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import pt.adrz.gymlogger.dao.DAOExerciceFactory;
+import pt.adrz.gymlogger.dao.ExerciceFactory;
 import pt.adrz.gymlogger.model.Exercice;
 import pt.adrz.gymlogger.model.Exercices;
+
 
 
 @Path("/exercices")
 public class ExerciceService {
 	
-	DAOExerciceFactory exercices = DAOExerciceFactory.getDAOFactory(DAOExerciceFactory.MYSQL_JDBC);
+	ExerciceFactory exercices = ExerciceFactory.getDAOFactory(ExerciceFactory.MYSQL_JDBC);
 	
 	@GET
 	//@Produces({ MediaType.APPLICATION_JSON , MediaType.APPLICATION_XML })

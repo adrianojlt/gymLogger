@@ -4,21 +4,18 @@ import org.restlet.data.Status;
 import org.restlet.ext.jackson.JacksonRepresentation;
 import org.restlet.representation.EmptyRepresentation;
 import org.restlet.representation.Representation;
-import org.restlet.representation.StringRepresentation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ResourceException;
 import org.restlet.resource.ServerResource;
 
 import pt.adrz.gymlogger.dao.FactoryGym;
-import pt.adrz.gymlogger.dao.WorkoutDAO;
-import pt.adrz.gymlogger.dao.WorkoutDAOJDBC;
-import pt.adrz.gymlogger.dao.WorkoutFactory;
-import pt.adrz.gymlogger.model.Workout;
+import pt.adrz.gymlogger.dao.MuscleGroupDAO;
+import pt.adrz.gymlogger.model.MuscleGroup;
 
-public class WorkoutServerResource extends ServerResource {
+public class MuscleGroupServerResource extends ServerResource {
 
-	private WorkoutDAO workoutsDAO = FactoryGym.getWorkoutDAO( FactoryGym.STORAGE_TYPE.MYSQL_JDBC );
-	
+	private MuscleGroupDAO groupDAO = FactoryGym.getMuscleGroupDAO( FactoryGym.STORAGE_TYPE.MYSQL_JDBC );
+
 	private Integer id;
 
 	@Override
@@ -31,18 +28,17 @@ public class WorkoutServerResource extends ServerResource {
 
 		Representation rep = new EmptyRepresentation();
 		Status status = null;
+		MuscleGroup group = new MuscleGroup();
 
 		try {
 
-			Workout workout = workoutsDAO.getWorkoutById(id);
-			JacksonRepresentation<Workout> jWorkout = new JacksonRepresentation<Workout>(workout);
-			rep = jWorkout;
-
+			group = groupDAO.getMuscleGroup(id);
+			rep = new JacksonRepresentation<MuscleGroup>(group);
 			status = Status.SUCCESS_OK;
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			rep = new StringRepresentation(e.getMessage());
-			status = Status.SERVER_ERROR_INTERNAL;
+			throw new ResourceException(Status.SERVER_ERROR_INTERNAL,e.getMessage());
 		}
 
 		this.getResponse().setStatus(status);

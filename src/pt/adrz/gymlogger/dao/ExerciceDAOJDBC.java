@@ -14,7 +14,7 @@ import javax.sql.DataSource;
 import pt.adrz.gymlogger.model.Exercice;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
-public class ExerciceDAOJDBC extends DAOExerciceFactory {
+public class ExerciceDAOJDBC extends ExerciceFactory {
 
 	@Resource(name = "jdbc/gymlogger")
 	private DataSource datasource;
