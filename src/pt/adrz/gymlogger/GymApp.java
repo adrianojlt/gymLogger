@@ -4,6 +4,7 @@ import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
 
+import pt.adrz.gymlogger.filters.CustomHeaders;
 import pt.adrz.gymlogger.resources.MuscleGroupServerResource;
 import pt.adrz.gymlogger.resources.MuscleGroupsServerResource;
 import pt.adrz.gymlogger.resources.WorkoutServerResource;
@@ -13,6 +14,8 @@ public class GymApp extends Application {
 
 	@Override
 	public Restlet createInboundRoot() {
+		
+		CustomHeaders headers = new CustomHeaders(this.getContext());
 		
 		Router router = new Router(this.getContext());
 		
@@ -30,8 +33,9 @@ public class GymApp extends Application {
 		router.attach("/workouts/", WorkoutsServerResource.class);
 		router.attach("/workouts/{id}", WorkoutServerResource.class);
 		router.attach("/workouts/{id}/", WorkoutServerResource.class);
+		
+		headers.setNext(router);
 
-		return router;
+		return headers;
 	}
-
 }
