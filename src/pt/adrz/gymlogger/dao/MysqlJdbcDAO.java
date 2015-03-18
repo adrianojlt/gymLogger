@@ -7,7 +7,7 @@ public class MysqlJdbcDAO extends FactoryGym {
 
 	@Override
 	public MuscleGroupDAO getMuscleGroupDAO() {
-		return null;
+		return new MuscleGroupDAOJDBC();
 	}
 
 	@Override

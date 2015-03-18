@@ -9,7 +9,7 @@ var app = angular.module('gymApp');
 app.config(['$routeProvider', function($routeProvider) {
 	
         var views = '/app/views/';
-        views = '/gymlogger/' + views; // ... for apache tomcat
+        //views = '/gymlogger/' + views; // ... for apache tomcat
         
         $routeProvider
 

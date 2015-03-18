@@ -81,7 +81,7 @@
 	            <label class='control-label'>Exercicio</label>
 	            <select class="form-control input" name="exercise"
 	                ng-model="exercise.selectedExercise" 
-	                ng-options="exec.name for exec in exercise.selectedGroup.exercises track by exec.id"
+	                ng-options="exec.name for exec in exercise.selectedGroup.exercices track by exec.id"
 	                ng-change="exerciseChanged(exercise.selectedExercise);">
 	                    <option value="">Exercise Name</option>
 	            </select>
@@ -130,9 +130,9 @@
 	</div>
 	
 	<pre> {{workout|json}}</pre>
-	<pre> {{workout|json}}</pre>
 	
 	<!--
+	<pre> {{workout|json}}</pre>
 	<pre> {{repetitions|json}}</pre>
 	-->
 

@@ -4,7 +4,6 @@ var gymApp = angular.module('gymApp.workout');
 
 gymApp.controller('CreateWorkoutController', ['$scope','$window','$http',CreateWorkoutController]);
 
-
 function CreateWorkoutController($scope,$window,$http) {
 	
 	var self = this;
@@ -23,7 +22,9 @@ function CreateWorkoutController($scope,$window,$http) {
     	$scope.opened = true;
   	};
 
-	$http.get('create.json').then(function(res) {
+	$http.get('http://localhost:9000/groups').then(function(res) {
+
+		console.log(res.data);
 		$scope.musclegroups = res.data;
 	});
 
@@ -39,11 +40,15 @@ function CreateWorkoutController($scope,$window,$http) {
 
 	$scope.muscleGroupChanged = function(exercise) {
 
-		console.log('selectedGroup: ',exercise.selectedGroup);
-		console.log('exercise: ',exercise);
+		//console.log('selectedGroup: ',exercise.selectedGroup);
+		//console.log('exercise: ',exercise);
 
-		if ( exercise.selectedGroup == undefined ) 		exercise.selectedGroup = null;
-		if ( exercise.selectedExercise == undefined ) 	exercise.selectedExercise = null;
+		if ( exercise.selectedGroup == undefined ) {
+		 	exercise.selectedGroup = null;
+			exercise.selectedExercise = null;
+		 }
+		if ( exercise.selectedExercise == undefined ) 	
+			exercise.selectedExercise = null;
 	};
 
 	$scope.exerciseChanged = function(selectedExercise) {
