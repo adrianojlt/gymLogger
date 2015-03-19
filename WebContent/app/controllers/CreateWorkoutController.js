@@ -24,7 +24,7 @@ function CreateWorkoutController($scope,$window,$http) {
 
 	$http.get('http://localhost:9000/groups').then(function(res) {
 
-		console.log(res.data);
+		//console.log(res.data);
 		$scope.musclegroups = res.data;
 	});
 
@@ -35,6 +35,13 @@ function CreateWorkoutController($scope,$window,$http) {
 			selectedExercise: null
 		}
 	];
+	
+	$scope.wkt = {
+		repetitions: 
+		[
+			//{ weight:"", num:"" }
+		]
+	};
 
 	$scope.getMuscleGroups = function() {};
 
@@ -62,6 +69,14 @@ function CreateWorkoutController($scope,$window,$http) {
 			{"id":"2","name":"front squats"}
 		];
 	};
+	
+	$scope.changedStartDate = function() {
+		//console.log($scope.workout);
+	};
+
+	$scope.changedEndDate = function() {
+		//console.log($scope.workout);
+	};
 
 	$scope.addExerciseInput = function(indice) {
 		$scope.workout.splice( indice + 1 , 0 , {repetitions:[{weight:"",rep:""}]} );
@@ -79,14 +94,33 @@ function CreateWorkoutController($scope,$window,$http) {
 		if ( $scope.workout[indice].repetitions.length > 1 ) $scope.workout[indice].repetitions.splice($index,1);
 	};
 
+	
 	$scope.save = function() {
+		
+		$scope.workout.forEach(function(entry) {
+
+			var exerciseID = entry.selectedExercise.id;
+
+			entry.repetitions.forEach(function(repetition) {
+
+				$scope.wkt.repetitions.push(
+					{
+						weight:repetition.weight,
+						num:repetition.rep,
+						exercice: {
+							id: exerciseID
+						}
+					}
+				);
+			});
+		});
+
+		console.log($scope.wkt);
+	};
+	
+	$scope.cancel = function() {
 		console.log($scope.workout[0].repetitions);
 		console.log($scope.repetitions);
-	};
-
-	$scope.cancel = function() {
-		console.log('cancel');
-		console.log($scope.workout);
 	};
 }
 
