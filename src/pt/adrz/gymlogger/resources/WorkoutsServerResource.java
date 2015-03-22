@@ -38,14 +38,12 @@ public class WorkoutsServerResource extends ServerResource {
 		try {
 
 			workouts = workoutsDAO.getAllWorkouts();
-			JacksonRepresentation<List<Workout>> jAll = new JacksonRepresentation<List<Workout>>(workouts); 
-			rep = jAll;
-
+			rep = new JacksonRepresentation<List<Workout>>(workouts); 
 			status = Status.SUCCESS_OK;
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			rep = new StringRepresentation(e.getMessage());
-			status = Status.SERVER_ERROR_INTERNAL;
+			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, e.getMessage());
 		}
 
 		this.getResponse().setStatus(status);
@@ -57,19 +55,31 @@ public class WorkoutsServerResource extends ServerResource {
 
 		Representation rep = new EmptyRepresentation();
 		Status status = null;
-		JacksonRepresentation<Workout> jWorkout = new JacksonRepresentation<Workout>(representation, Workout.class);
-		//JacksonRepresentation<Repetition> jRepetition = new JacksonRepresentation<Repetition>(representation, Repetition.class);
+		Integer workoutID;
+		JacksonRepresentation<Workout> jWorkout;
+		Workout workout;
 		
 		try {
-			Workout workout = jWorkout.getObject();
+
+			jWorkout = new JacksonRepresentation<Workout>(representation, Workout.class);
+			workout = jWorkout.getObject();
+			
+			if ( workout.getRepetitions() == null || workout.getRepetitions().isEmpty() ) throw new NullPointerException("empty repetitions");
+			
+			workoutID = this.workoutsDAO.createWorkout(workout);
+
 			rep = new JacksonRepresentation<Workout>(workout);
-			//Repetition repetition = jRepetition.getObject();
 			status = Status.SUCCESS_CREATED;
-		} catch (IOException e) {
+
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, e.getMessage());
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ResourceException(Status.SERVER_ERROR_INTERNAL, e.getMessage());
 		}
 		
+        this.getResponse().setLocationRef(getRequest().getResourceRef().addSegment(workoutID.toString()));
 		this.getResponse().setStatus(status);
 		return rep;
 	}

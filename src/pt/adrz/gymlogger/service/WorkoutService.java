@@ -50,11 +50,9 @@ public class WorkoutService {
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response createWorkout(String representation) {
-		Integer createdWorkoutID = workouts.createWorkout(representation);
-		return Response
-				.status(Response.Status.CREATED)
-				.entity("New workout created " + createdWorkoutID)
-				.header("idCreated", String.valueOf(createdWorkoutID)).build();
+		//Integer createdWorkoutID = workouts.createWorkout(representation);
+		//return Response.status(Response.Status.CREATED).entity("New workout created " + createdWorkoutID).header("idCreated", String.valueOf(createdWorkoutID)).build();
+		return null;
 	}
 
 	@GET

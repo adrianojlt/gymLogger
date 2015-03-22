@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		+ "INNER JOIN exercice e ON e.id = r.id_exercice "
 		+ "INNER JOIN musclegroup g ON g.id = e.id_musclegroup "
 		+ "WHERE w.id > 0 ORDER BY id_rep DESC;";
+
+	private static final String QUERY_INSERT_WORKOUT 	= "INSERT INTO Workout (id_User,start,end) VALUES (1,?,?);";
+	private static final String QUERY_INSERT_REPETITION = "INSERT INTO Repetition ( id_Workout, id_Exercice, weight, num ) VALUES (?,?,?,?);";
 
 	//private RepetitionDAO repetitionData;
 
@@ -108,6 +112,7 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		ResultSet rs = null;
 
 		try {
+
 			conn = ConnectionFactory.getConnection();
 			Statement statement = conn.createStatement();
 			rs = statement.executeQuery(QUERY_GET_WORKOUTS);
@@ -119,18 +124,57 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 			for ( Workout workout : workouts) {
 				workout.getId();
 			}
+
 		}
 		catch (SQLException eSQL) { eSQL.printStackTrace(); }
 		finally { ConnectionFactory.close(conn); }
 		return workouts;
 	}
 	
-	public Integer createWorkout(String json) {
+	public Integer createWorkout(Workout workout) {
 		
-		// create workout
-		return null;
+		Connection conn = null;
+		PreparedStatement ps = null;
+		Integer workoutID = 0;
+
+		try {
+
+			conn = ConnectionFactory.getConnection();
+			ps = conn.prepareStatement(QUERY_INSERT_WORKOUT, Statement.RETURN_GENERATED_KEYS);
+			
+			ps.setTimestamp(1, new Timestamp(workout.getStart().getTime()));
+			ps.setTimestamp(2, new Timestamp(workout.getEnd().getTime()));
+
+			ps.executeUpdate();
+
+			ResultSet rs = ps.getGeneratedKeys();
+			if ( rs.next() ) workoutID = rs.getInt(1);
+			
+			List<Repetition> repetitions = workout.getRepetitions();
+			
+			for ( Repetition rep : repetitions ) {
+
+				ps = conn.prepareStatement(QUERY_INSERT_REPETITION);
+
+				ps.setInt(1, workoutID);
+				ps.setInt(2, rep.getExercice().getId());
+				ps.setFloat(3, rep.getWeight());
+				ps.setInt(4, rep.getNum());
+
+				ps.executeUpdate();
+			}
+
+		}
+		catch (SQLException eSQL) { eSQL.printStackTrace(); }
+		catch (Exception e) { e.printStackTrace(); }
+		finally { ConnectionFactory.close(conn); }
+
+		return workoutID;
 	}
 	
+	public boolean removeWorkout(Workout workout) {
+		return false;
+	}
 	
 	private Workout processWorkout(ResultSet rs) throws SQLException {
 
