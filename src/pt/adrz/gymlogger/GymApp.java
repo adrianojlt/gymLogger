@@ -5,6 +5,7 @@ import org.restlet.Restlet;
 import org.restlet.routing.Router;
 
 import pt.adrz.gymlogger.filters.CustomHeaders;
+import pt.adrz.gymlogger.resources.ExercisesServerResource;
 import pt.adrz.gymlogger.resources.MuscleGroupServerResource;
 import pt.adrz.gymlogger.resources.MuscleGroupsServerResource;
 import pt.adrz.gymlogger.resources.WorkoutServerResource;
@@ -24,10 +25,10 @@ public class GymApp extends Application {
 		router.attach("/groups/{id}", MuscleGroupServerResource.class);
 		router.attach("/groups/{id}/", MuscleGroupServerResource.class);
 
-		router.attach("/exercices", MuscleGroupServerResource.class);
-		router.attach("/exercices/", MuscleGroupServerResource.class);
-		router.attach("/exercices/{id}", MuscleGroupServerResource.class);
-		router.attach("/exercices/{id}/", MuscleGroupServerResource.class);
+		router.attach("/exercices", ExercisesServerResource.class);
+		router.attach("/exercices/", ExercisesServerResource.class);
+		router.attach("/exercices/{id}", ExercisesServerResource.class);
+		router.attach("/exercices/{id}/", ExercisesServerResource.class);
 
 		router.attach("/workouts", WorkoutsServerResource.class);
 		router.attach("/workouts/", WorkoutsServerResource.class);
