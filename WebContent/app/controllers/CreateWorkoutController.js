@@ -2,9 +2,9 @@
 
 var gymApp = angular.module('gymApp.workout');
 
-gymApp.controller('CreateWorkoutController', ['$scope','$window','$http',CreateWorkoutController]);
+gymApp.controller('CreateWorkoutController', ['$scope','$window','$http','$filter',CreateWorkoutController]);
 
-function CreateWorkoutController($scope,$window,$http) {
+function CreateWorkoutController($scope,$window,$http,$filter) {
 	
 	var self = this;
 
@@ -13,18 +13,28 @@ function CreateWorkoutController($scope,$window,$http) {
 		startingDay: 1
 	};
 
-	$scope.dateStart = new Date().getTime();
+	//$scope.dateStart = new Date().getTime();
+	
+	$scope.dateStart = {};
+	$scope.hourStart = {};
+	$scope.dateEnd = {};
+	$scope.hourEnd = {};
 
-	$scope.open = function($event) {
-		
+	$scope.dateStart.open = function($event) {
+		console.log($event);
     	$event.preventDefault();
     	$event.stopPropagation();
-    	$scope.opened = true;
+    	$scope.dateStart.opened = true;
   	};
 
-	$http.get('http://localhost:9000/groups').then(function(res) {
+	$scope.dateEnd.open = function($event) {
+    	$event.preventDefault();
+    	$event.stopPropagation();
+    	$scope.dateEnd.opened = true;
+  	};
 
-		//console.log(res.data);
+
+	$http.get('http://localhost:9000/groups').then(function(res) {
 		$scope.musclegroups = res.data;
 	});
 
@@ -36,13 +46,6 @@ function CreateWorkoutController($scope,$window,$http) {
 		}
 	];
 	
-	$scope.wkt = {
-		repetitions: 
-		[
-			//{ weight:"", num:"" }
-		]
-	};
-
 	$scope.getMuscleGroups = function() {};
 
 	$scope.muscleGroupChanged = function(exercise) {
@@ -70,12 +73,23 @@ function CreateWorkoutController($scope,$window,$http) {
 		];
 	};
 	
-	$scope.changedStartDate = function() {
-		//console.log($scope.workout);
+	$scope.dateStart.change = function() {
+		//$scope.dateEnd.data = new Date($filter('date')($scope.dateStart.data,"yyyy-MM-dd"));
+		$scope.dateEnd.data = $filter('date')($scope.dateStart.data,"yyyy-MM-dd");
+		//$scope.dateEnd.data = new Date($scope.dateStart.data);
+		
 	};
 
-	$scope.changedEndDate = function() {
+	$scope.dateEnd.change = function() {
 		//console.log($scope.workout);
+	};
+	
+	$scope.hourStart.change = function() {
+		
+	};
+
+	$scope.hourEnd.change = function() {
+		
 	};
 
 	$scope.addExerciseInput = function(indice) {
@@ -95,7 +109,16 @@ function CreateWorkoutController($scope,$window,$http) {
 	};
 
 	
-	$scope.save = function() {
+	$scope.save = function(valid) {
+		
+		$scope.wkt = {}; $scope.wkt.repetitions = [];
+
+		$scope.wkt.start = $scope.dateStart.data;
+		$scope.wkt.start.setHours($scope.hourStart.data.getHours());
+		$scope.wkt.start.setMinutes($scope.hourStart.data.getMinutes());
+		$scope.wkt.end = new Date($scope.dateEnd.data);
+		$scope.wkt.end.setHours($scope.hourEnd.data.getHours());
+		$scope.wkt.end.setMinutes($scope.hourEnd.data.getMinutes());
 		
 		$scope.workout.forEach(function(entry) {
 
@@ -115,12 +138,21 @@ function CreateWorkoutController($scope,$window,$http) {
 			});
 		});
 
-		console.log($scope.wkt);
+		//console.log($scope.wkt);
+		//return;
+		
+		$http.post('http://localhost:9000/workouts',$scope.wkt).success(function(data, status, headers, config) {
+			console.log(status);
+		}).error(function(data, status, headers, config) { });
 	};
 	
 	$scope.cancel = function() {
-		console.log($scope.workout[0].repetitions);
-		console.log($scope.repetitions);
+		//console.log($scope.workout[0].repetitions);
+		console.log($scope.wkt.start);
+		console.log($scope.wkt.end);
+		//console.log(new Date($scope.dateEnd.data));
+		//$window.dat = new Date($scope.dateEnd.data);
+		//$window.tim = $scope.hourEnd.data;
 	};
 }
 

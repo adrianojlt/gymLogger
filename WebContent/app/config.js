@@ -20,11 +20,11 @@ app.config(['$routeProvider', function($routeProvider) {
         })
 
         // WORKOUTS
-        .when("/list", {
+        .when("/workout/list", {
             controller: 'ListWorkoutController',
             templateUrl: views + "workout/list.htm"
         })
-        .when("/create", {
+        .when("/workout/create", {
             controller: 'CreateWorkoutController',
             templateUrl: views + "workout/create.htm"
         })
