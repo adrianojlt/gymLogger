@@ -32,9 +32,32 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 	private static final String QUERY_INSERT_REPETITION = "INSERT INTO Repetition ( id_Workout, id_Exercice, weight, num ) VALUES (?,?,?,?);";
 
 	//private RepetitionDAO repetitionData;
+	
+	@Override
+	public List<Workout> getWorkouts() {
+		
+		List<Workout> workouts = new ArrayList<Workout>();
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+
+		try {
+
+			conn = ConnectionFactory.getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(QUERY_GET_WORKOUTS);
+
+			while ( rs.next() ) { workouts.add(this.processWorkout(rs)); }
+		}
+		catch (SQLException eSQL) { eSQL.printStackTrace(); }
+		finally { ConnectionFactory.close(rs, st, conn); }
+	
+		return workouts;
+	}
+
 
 	@Override
-	public List<Workout> getAllWorkouts() {
+	public List<Workout> getWorkoutsWithRepetitions() {
 
 		List<Workout> workouts = new ArrayList<Workout>();
 		Connection conn = null;
@@ -187,4 +210,5 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		return workout;
 	}
 
+	
 }

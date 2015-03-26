@@ -37,7 +37,7 @@ public class WorkoutsServerResource extends ServerResource {
 
 		try {
 
-			workouts = workoutsDAO.getAllWorkouts();
+			workouts = workoutsDAO.getWorkouts();
 			rep = new JacksonRepresentation<List<Workout>>(workouts); 
 			status = Status.SUCCESS_OK;
 

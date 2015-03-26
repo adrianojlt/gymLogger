@@ -34,7 +34,7 @@ public class WorkoutService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON) 
 	public List<Workout> getWorkouts() {
-		return workouts.getAllWorkouts();
+		return workouts.getWorkoutsWithRepetitions();
 	}
 	
 	@GET
