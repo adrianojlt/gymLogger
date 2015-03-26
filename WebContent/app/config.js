@@ -8,34 +8,40 @@ var app = angular.module('gymApp');
 // ngRoute
 app.config(['$routeProvider', function($routeProvider) {
 	
-        var views = '/app/views/';
-        //views = '/gymlogger/' + views; // ... for apache tomcat
-        
-        $routeProvider
+    var views = '/app/views/';
+    //views = '/gymlogger/' + views; // ... for apache tomcat
+    
+    $routeProvider
 
-        // Home
-        .when("/", {
-            controller: 'DashboardController',
-            templateUrl: views + "dashboard.htm"
-        })
+    // Home
+    .when("/", {
+        controller: 'DashboardController',
+        templateUrl: views + "dashboard.htm"
+    })
 
-        // WORKOUTS
-        .when("/workout/list", {
-            controller: 'ListWorkoutController',
-            templateUrl: views + "workout/list.htm"
-        })
-        .when("/workout/create", {
-            controller: 'CreateWorkoutController',
-            templateUrl: views + "workout/create.htm"
-        })
-        
-        // else 404
-        .otherwise({
-            templateUrl: views + "404.htm", 
-        	controller: function($window) {
+    // WORKOUTS
+    .when("/workout/list", {
+        controller: 'ListWorkoutController',
+        templateUrl: views + "workout/list.htm"
+    })
+    .when("/workout/create", {
+        controller: 'CreateWorkoutController',
+        templateUrl: views + "workout/create.htm"
+    })
+    
+    // else 404
+    .otherwise({
+        templateUrl: views + "404.htm", 
+    	controller: function($window) {
 
-        	}
-        });
+    	}
+    });
 }]);
+
+app.constant('globals', {
+    url:'http://localhost:9000/'
+});
+
+
 
 })(window);

@@ -2,9 +2,11 @@
 
 var gymApp = angular.module('gymApp.workout');
 
-gymApp.controller('CreateWorkoutController', ['$scope','$window','$http','$filter',CreateWorkoutController]);
+gymApp.controller('CreateWorkoutController', ['$scope','$window','$http','$filter','globals',CreateWorkoutController]);
 
-function CreateWorkoutController($scope,$window,$http,$filter) {
+function CreateWorkoutController($scope,$window,$http,$filter,globals) {
+
+	console.log(globals);
 	
 	var self = this;
 
@@ -34,7 +36,7 @@ function CreateWorkoutController($scope,$window,$http,$filter) {
   	};
 
 
-	$http.get('http://localhost:9000/groups').then(function(res) {
+	$http.get( globals.url + 'groups').then(function(res) {
 		$scope.musclegroups = res.data;
 	});
 

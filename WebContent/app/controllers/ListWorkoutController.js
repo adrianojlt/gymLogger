@@ -6,7 +6,7 @@ gymApp.controller('ListWorkoutController', ['$scope','$http',ListWorkoutControll
 
 function ListWorkoutController($scope,$http) {
 
-	$http.get('http://localhost:9000/workouts/31').then(function(res) {
+	$http.get('http://localhost:9000/workouts').then(function(res) {
 		$scope.workouts = res.data;
 		console.log($scope.workouts);
 	});	
