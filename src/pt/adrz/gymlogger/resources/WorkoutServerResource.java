@@ -13,8 +13,6 @@ import org.restlet.resource.ServerResource;
 
 import pt.adrz.gymlogger.dao.FactoryGym;
 import pt.adrz.gymlogger.dao.WorkoutDAO;
-import pt.adrz.gymlogger.dao.WorkoutDAOJDBC;
-import pt.adrz.gymlogger.dao.WorkoutFactory;
 import pt.adrz.gymlogger.model.Workout;
 
 public class WorkoutServerResource extends ServerResource {

@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.Factory;
+
 import pt.adrz.gymlogger.dao.ExerciceFactory;
+import pt.adrz.gymlogger.dao.FactoryGym;
 import pt.adrz.gymlogger.dao.WorkoutDAO;
 import pt.adrz.gymlogger.dao.WorkoutDAOJDBC;
-import pt.adrz.gymlogger.dao.WorkoutFactory;
 import pt.adrz.gymlogger.model.Workout;
 
 /**
@@ -70,9 +72,7 @@ public class GymController extends HttpServlet {
 
 	protected void testMethod02(HttpServletRequest request, HttpServletResponse response) {
 		
-		//DAOExerciceFactory data = DAOExerciceFactory.getDAOFactory(DAOExerciceFactory.MYSQL_JDBC);
-		//WorkoutDAO workoutDAO = new WorkoutDAOJDBC();
-		WorkoutDAO workoutDAO = WorkoutFactory.getWorkoutDAO();
+		WorkoutDAO workoutDAO = FactoryGym.getWorkoutDAO(FactoryGym.STORAGE_TYPE.MYSQL_JDBC);
 		List<Workout> workouts = workoutDAO.getWorkoutsWithRepetitions();
 
 		String view = "jsp/listExercice.jsp";
