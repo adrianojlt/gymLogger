@@ -1,7 +1,7 @@
 <div class="container">
 
 
-	<div class="row">
+	<div class="row" st-table="workouts">
 
 		<table class="table table-hover responsiveTable">
 
@@ -19,16 +19,18 @@
 	    	</thead>
 
 	    	<tbody>
-	    		<tr class="">
-	    			<td>1</td>
-	    			<td>10/10/2014</td>
-	    			<td>11:00</td>
-	    			<td>12:00</td>
-	    			<td>1</td>
-	    			<td>Legs</td>
-	    			<td>4</td>
-	    			<td>8</td>
-	    		</tr> 
+
+	    		<tr class="" ng-repeat="workout in workouts track by $index">
+	    			<td>{{ workout.id }}</td>
+	    			<td>{{ workout.start | date }}</td>
+	    			<td>{{ workout.start | date: "h:mm a" }}</td>
+	    			<td>{{ workout.end | date: "h:mm a" }}</td>
+	    			<td>{{ numberOfGroups(workout); }}</td>
+	    			<td>{{ groupNames(workout,$index); }}</td>
+	    			<td>X</td>
+	    			<td>{{ totalRepetitions(workout); }}</td>
+	    		</tr>
+
 	    	</tbody>
 
 	    </table>
@@ -36,8 +38,7 @@
 	</div>
 
 	<div class="row">
-		<pre>
-		{{ workouts|json }}
-		</pre>
+		<pre> {{ workouts[0]|json }} </pre>
 	</div>
+
 </div>

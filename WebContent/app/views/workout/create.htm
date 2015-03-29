@@ -109,7 +109,7 @@
 	            <select class="form-control input" name="exercise"
 	                ng-model="exercise.selectedExercise" 
 	                ng-required="true"
-	                ng-options="exec.name for exec in exercise.selectedGroup.exercices track by exec.id"
+	                ng-options="exec.name for exec in exercise.selectedGroup.exercises track by exec.id"
 	                ng-change="exerciseChanged(exercise.selectedExercise);">
 	                    <option value="">--- Exercise Name ---</option>
 	            </select>

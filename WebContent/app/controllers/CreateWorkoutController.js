@@ -36,7 +36,7 @@ function CreateWorkoutController($scope,$window,$http,$filter,globals) {
   	};
 
 
-	$http.get( globals.url + 'groups').then(function(res) {
+	$http.get( globals.url + 'groups' ).then(function(res) {
 		$scope.musclegroups = res.data;
 	});
 
@@ -132,7 +132,7 @@ function CreateWorkoutController($scope,$window,$http,$filter,globals) {
 					{
 						weight:repetition.weight,
 						num:repetition.rep,
-						exercice: {
+						exercise: {
 							id: exerciseID
 						}
 					}

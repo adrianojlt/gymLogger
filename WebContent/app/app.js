@@ -14,6 +14,7 @@ app.controller('MainController', function( $scope , $location ) {
     };
 });
 
-angular.module('gymApp.workout',['ui.bootstrap','ui.bootstrap.datepicker']);
+// 'set' module ... create a module with the following dependencies ...
+angular.module('gymApp.workout',['ui.bootstrap','ui.bootstrap.datepicker','smart-table']);
 
 })(window);
