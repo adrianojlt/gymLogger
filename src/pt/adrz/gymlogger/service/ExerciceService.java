@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import pt.adrz.gymlogger.dao.ExerciceFactory;
-import pt.adrz.gymlogger.model.Exercice;
+import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.Exercices;
 
 
@@ -25,7 +25,7 @@ public class ExerciceService {
 	@GET
 	//@Produces({ MediaType.APPLICATION_JSON , MediaType.APPLICATION_XML })
 	@Produces(MediaType.APPLICATION_JSON) 
-	public List<Exercice> findAll() {
+	public List<Exercise> findAll() {
 	//public Response findAll() {
 		return exercices.listAllExercices();
 		//return Response.status(200).entity(data.listAllExercices()).build);
@@ -43,7 +43,7 @@ public class ExerciceService {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON) 
 	public Response findById(@PathParam("id") int id) {
-		Exercice exercice = exercices.getExerciceById(id);
+		Exercise exercice = exercices.getExerciceById(id);
 		if ( exercice == null ) { throw new WebApplicationException(Response.Status.NOT_FOUND); }
 		return Response.status(200).entity(exercice).build();
 	}
@@ -51,7 +51,7 @@ public class ExerciceService {
 	@GET
 	@Path("/group/{id}")
 	@Produces(MediaType.APPLICATION_JSON) 
-	public List<Exercice> findByGroupId(@PathParam("id") int id) {
+	public List<Exercise> findByGroupId(@PathParam("id") int id) {
 	//public Response findByGroupId(@PathParam("id") int id) {
 		//Exercices exercices = new Exercices(data.getExercicesByMuscleGroupId(id));
 		return exercices.getExercicesByMuscleGroupId(id);

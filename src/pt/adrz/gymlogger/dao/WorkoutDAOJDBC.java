@@ -21,15 +21,15 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		"SELECT id , start , end FROM workout WHERE id = ?;";
 
 	private static final String QUERY_GET_ALL_WORKOUTS = 
-		"SELECT w.id AS id_work , r.id AS id_rep , w.start , w.end , g.name AS group_name , r.id_exercice , e.name AS exercice_name , r.weight , r.num  "
+		"SELECT w.id AS id_work , r.id AS id_rep , w.start , w.end , g.name AS group_name , r.id_exercise , e.name AS exercise_name , r.weight , r.num  "
 		+ "FROM workout w "
 		+ "INNER JOIN repetition r ON r.id_workout = w.id "
-		+ "INNER JOIN exercice e ON e.id = r.id_exercice "
+		+ "INNER JOIN exercise e ON e.id = r.id_exercise "
 		+ "INNER JOIN musclegroup g ON g.id = e.id_musclegroup "
 		+ "WHERE w.id > 0 ORDER BY id_rep DESC;";
 
 	private static final String QUERY_INSERT_WORKOUT 	= "INSERT INTO Workout (id_User,start,end) VALUES (1,?,?);";
-	private static final String QUERY_INSERT_REPETITION = "INSERT INTO Repetition ( id_Workout, id_Exercice, weight, num ) VALUES (?,?,?,?);";
+	private static final String QUERY_INSERT_REPETITION = "INSERT INTO Repetition ( id_workout, id_exercise, weight, num ) VALUES (?,?,?,?);";
 
 	//private RepetitionDAO repetitionData;
 	
@@ -108,9 +108,9 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 			rs = ps.executeQuery();
 			
 			if ( rs.next() ) {
-				workout.setId(rs.getInt("id"));
-				workout.setStart(rs.getTimestamp("start"));
-				workout.setEnd(rs.getTimestamp("end"));
+				workout.setId(rs.getInt(Workout.ID));
+				workout.setStart(rs.getTimestamp(Workout.START));
+				workout.setEnd(rs.getTimestamp(Workout.END));
 			}
 			else { 
 				return null;
@@ -180,7 +180,7 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 				ps = conn.prepareStatement(QUERY_INSERT_REPETITION);
 
 				ps.setInt(1, workoutID);
-				ps.setInt(2, rep.getExercice().getId());
+				ps.setInt(2, rep.getExercise().getId());
 				ps.setFloat(3, rep.getWeight());
 				ps.setInt(4, rep.getNum());
 
@@ -202,11 +202,11 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 	private Workout processWorkout(ResultSet rs) throws SQLException {
 
 		Workout workout = new Workout();
-		workout.setId(rs.getInt("id"));
-		//workout.setStart(rs.getDate("start"));
-		workout.setStart(rs.getTimestamp("start"));
-		//workout.setEnd(rs.getDate("end"));
-		workout.setEnd(rs.getTimestamp("end"));
+
+		workout.setId(rs.getInt(Workout.ID));
+		workout.setStart(rs.getTimestamp(Workout.START));
+		workout.setEnd(rs.getTimestamp(Workout.END));
+
 		return workout;
 	}
 

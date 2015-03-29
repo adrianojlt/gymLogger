@@ -11,7 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import pt.adrz.gymlogger.model.Exercice;
+import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
 public class ExerciceDAOJDBC extends ExerciceFactory {
@@ -32,18 +32,18 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 		
 	}
 	
-	private Exercice processExercice(ResultSet rs) throws SQLException {
+	private Exercise processExercice(ResultSet rs) throws SQLException {
 
-		Exercice exercice = new Exercice();
+		Exercise exercice = new Exercise();
 		exercice.setId(rs.getInt("id"));
 		exercice.setName(rs.getString("name"));
 		return exercice;
 	}
 
 	@Override
-	public List<Exercice> listAllExercices() {
+	public List<Exercise> listAllExercices() {
 
-		List<Exercice> list = new ArrayList<Exercice>();
+		List<Exercise> list = new ArrayList<Exercise>();
 		Statement st = null;
 		ResultSet rs = null;
 		Connection conn = null;
@@ -67,9 +67,9 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 	}
 
 	@Override
-	public Exercice getExerciceById(int id) {
+	public Exercise getExerciceById(int id) {
 		
-		Exercice exercice = null;
+		Exercise exercice = null;
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		Connection conn = null;
@@ -82,7 +82,7 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-            	exercice = new Exercice();
+            	exercice = new Exercise();
             	exercice = this.processExercice(rs);
             }
             else {
@@ -97,9 +97,9 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 	}
 
 	@Override
-	public List<Exercice> getExercicesByMuscleGroupId(int id) {
+	public List<Exercise> getExercicesByMuscleGroupId(int id) {
 		
-		List<Exercice> list = new ArrayList<Exercice>();
+		List<Exercise> list = new ArrayList<Exercise>();
 		Connection conn = null;
 		
 		try {

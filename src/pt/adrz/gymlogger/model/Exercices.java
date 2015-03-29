@@ -9,23 +9,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
 @XmlRootElement
-@XmlSeeAlso(Exercice.class)
-public class Exercices extends ArrayList<Exercice>{
+@XmlSeeAlso(Exercise.class)
+public class Exercices extends ArrayList<Exercise>{
 	
 	private static final long serialVersionUID = 1L;
 
 	public Exercices() { super(); }
 	
-	public Exercices(Collection<? extends Exercice> exercices) {
+	public Exercices(Collection<? extends Exercise> exercices) {
 		super(exercices);
 	}
 	
 	@XmlElement(name = "exercice")
-	public List<Exercice> getExercices() {
+	public List<Exercise> getExercices() {
 		return this;
 	}
 
-	public void setExercices(List<Exercice> exercices) {
+	public void setExercices(List<Exercise> exercices) {
 		this.addAll(exercices);
 	}
 }

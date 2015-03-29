@@ -9,13 +9,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Repetition implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+
+	public static final String ID 			= "id";
+	public static final String ID_WORKOUT 	= "id_workout";
+	public static final String ID_EXERCISE 	= "id_exercise";
+	public static final String WEIGHT 		= "weight";
+	public static final String NUM 			= "num";
 	
 	private Integer id;
 	private Float weight;
 	private Integer num;
 
 	private Workout workout;
-	private Exercice exercice;
+	private Exercise exercise;
 
 	public Integer getId() { return id; }
 	public void setId(Integer id) { this.id = id; }
@@ -24,8 +30,8 @@ public class Repetition implements Serializable{
 	public Integer getNum() { return num; }
 	public void setNum(Integer num) { this.num = num; }
 
-	public Exercice getExercice() { return exercice; }
-	public void setExercice(Exercice exercice) { this.exercice = exercice; }
+	public Exercise getExercise() { return exercise; }
+	public void setExercise(Exercise exercise) { this.exercise = exercise; }
 
 	public Workout getWorkout() { return workout; }
 	public void setWorkout(Workout workout) { this.workout = workout; }

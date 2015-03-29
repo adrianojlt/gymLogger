@@ -11,11 +11,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Workout implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
+	public static final String ID 		= "id";
+	public static final String ID_USER 	= "id_user";
+	public static final String START 	= "start";
+	public static final String END 		= "end";
 
 	private Integer id;
-	//private Date start;
 	private Timestamp start;
-	//private Date end;
 	private Timestamp end;
 	
 	private List<Repetition> repetitions;

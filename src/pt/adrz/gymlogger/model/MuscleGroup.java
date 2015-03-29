@@ -7,11 +7,15 @@ public class MuscleGroup implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	public static final String ID = "id";
+	public static final String NAME = "name";
+	public static final String NOME = "nome";
+
 	private Integer id;
 	private String name;
 	private String nome;
 
-	private List<Exercice> exercices;
+	private List<Exercise> exercises;
 	
 	public Integer getId() { return id; }
 	public void setId(Integer id) { this.id = id; }
@@ -20,6 +24,6 @@ public class MuscleGroup implements Serializable{
 	public String getNome() { return nome; }
 	public void setNome(String nome) { this.nome = nome; }
 
-	public List<Exercice> getExercices() { return exercices; }
-	public void setExercices(List<Exercice> exercices) { this.exercices = exercices; }
+	public List<Exercise> getExercises() { return exercises; }
+	public void setExercises(List<Exercise> exercises) { this.exercises = exercises; }
 }

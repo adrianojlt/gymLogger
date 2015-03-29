@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import pt.adrz.gymlogger.model.Exercice;
+import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 import pt.adrz.gymlogger.model.Repetition;
 import pt.adrz.gymlogger.model.Workout;
@@ -16,18 +16,18 @@ import pt.adrz.gymlogger.model.Workout;
 public class RepetitionDAOJDBC implements RepetitionDAO {
 
 	private static final String QUERY_GET_REPETITIONS = 
-		"SELECT r.id as id , r.weight as weight , r.num as num , e.id as id_exercice , e.name as name , e.nome as nome , " +
+		"SELECT r.id as id , r.weight as weight , r.num as num , e.id as id_exercise , e.name as name , e.nome as nome , " +
 		"g.id as id_musclegroup , g.nome as musclegroupnome, g.name as musclegroupname " +
 		"FROM repetition r " + 
-		"INNER JOIN exercice e on e.id = r.id_exercice " + 
+		"INNER JOIN exercise e on e.id = r.id_exercise " + 
 		"INNER JOIN musclegroup g on g.id = e.id_musclegroup " +
 		"ORDER BY id DESC;";
 
 	private static final String QUERY_GET_REPETITIONS_BY_WORKOUTID = 
-		"SELECT r.id as id , r.weight as weight , r.num as num , e.id as id_exercice , e.name as name , e.nome as nome , " +
+		"SELECT r.id as id , r.weight as weight , r.num as num , e.id as id_exercise , e.name as name , e.nome as nome , " +
 		"g.id as id_musclegroup , g.nome as musclegroupnome, g.name as musclegroupname " +
 		"FROM repetition r " +
-		"INNER JOIN exercice e on e.id = r.id_exercice " + 
+		"INNER JOIN exercise e on e.id = r.id_exercise " + 
 		"INNER JOIN musclegroup g on g.id = e.id_musclegroup " +
 		"WHERE r.id_workout = ?";
 
@@ -51,21 +51,21 @@ public class RepetitionDAOJDBC implements RepetitionDAO {
 			while ( rs.next() ) { 
 				
 				Repetition repetition = new Repetition();
-				Exercice exercice = new Exercice();
+				Exercise exercise = new Exercise();
 				MuscleGroup muscleGroup = new MuscleGroup();
 				
 				muscleGroup.setId(rs.getInt("id_musclegroup"));
 				muscleGroup.setName(rs.getString("musclegroupname"));
 				muscleGroup.setNome(rs.getString("musclegroupnome"));
 
-				exercice.setId(rs.getInt("id_exercice"));
-				exercice.setName("name");
-				exercice.setMuscleGroup(muscleGroup);
+				exercise.setId(rs.getInt("id_exercise"));
+				exercise.setName("name");
+				exercise.setMuscleGroup(muscleGroup);
 				
 				repetition.setId(rs.getInt("id"));
 				repetition.setNum(rs.getInt("num"));
 				repetition.setWeight(rs.getFloat("weight"));
-				repetition.setExercice(exercice);
+				repetition.setExercise(exercise);
 				
 				repetitions.add(repetition);
 			}
@@ -94,22 +94,22 @@ public class RepetitionDAOJDBC implements RepetitionDAO {
 			while ( rs.next() ) { 
 
 				Repetition repetition = new Repetition();
-				Exercice exercice = new Exercice();
+				Exercise exercise = new Exercise();
 				MuscleGroup muscleGroup = new MuscleGroup();
 
 				muscleGroup.setId(rs.getInt("id_musclegroup"));
 				muscleGroup.setName(rs.getString("musclegroupname"));
 				muscleGroup.setNome(rs.getString("musclegroupnome"));
 
-				exercice.setId(rs.getInt("id_exercice"));
-				exercice.setName(rs.getString("name"));
-				exercice.setNome(rs.getString("nome"));
-				exercice.setMuscleGroup(muscleGroup);
+				exercise.setId(rs.getInt("id_exercise"));
+				exercise.setName(rs.getString("name"));
+				exercise.setNome(rs.getString("nome"));
+				exercise.setMuscleGroup(muscleGroup);
 
-				repetition.setId(rs.getInt("id"));
-				repetition.setWeight(rs.getFloat("weight"));
-				repetition.setNum(rs.getInt("num"));
-				repetition.setExercice(exercice);
+				repetition.setId(rs.getInt(Repetition.ID));
+				repetition.setWeight(rs.getFloat(Repetition.WEIGHT));
+				repetition.setNum(rs.getInt(Repetition.NUM));
+				repetition.setExercise(exercise);
 
 				repetitions.add(repetition);
 			}

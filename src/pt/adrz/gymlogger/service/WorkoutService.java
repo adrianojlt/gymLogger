@@ -16,7 +16,7 @@ import pt.adrz.gymlogger.dao.RepetitionDAO;
 import pt.adrz.gymlogger.dao.RepetitionDAOJDBC;
 import pt.adrz.gymlogger.dao.WorkoutDAO;
 import pt.adrz.gymlogger.dao.WorkoutDAOJDBC;
-import pt.adrz.gymlogger.model.Exercice;
+import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.Repetition;
 import pt.adrz.gymlogger.model.Workout;
 

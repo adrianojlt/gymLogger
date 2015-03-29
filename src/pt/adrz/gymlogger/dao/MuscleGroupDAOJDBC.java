@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
-import pt.adrz.gymlogger.model.Exercice;
+import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
 public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 
 	private static final String QUERY_GET_MUSCLEGROUPS = 
-			"SELECT g.id , g.name , g.nome , e.id AS id_exercice , e.name AS name_exercice , e.nome AS nome_exercice  FROM Musclegroup g "
-		+ 	"INNER JOIN exercice e on g.id = e.id_MuscleGroup;";
+			"SELECT g.id , g.name , g.nome , e.id AS id_exercise , e.name AS name_exercise , e.nome AS nome_exercise  FROM Musclegroup g "
+		+ 	"INNER JOIN exercise e on g.id = e.id_MuscleGroup;";
 
 	private static final String QUERY_GET_MUSCLEGROUPS_BY_ID = 
-			"SELECT g.id , g.name , g.nome , e.id AS id_exercice , e.name AS name_exercice , e.nome AS nome_exercice  FROM Musclegroup g "
-		+ 	"INNER JOIN exercice e on g.id = e.id_MuscleGroup "
+			"SELECT g.id , g.name , g.nome , e.id AS id_exercise , e.name AS name_exercise , e.nome AS nome_exercise  FROM Musclegroup g "
+		+ 	"INNER JOIN exercise e on g.id = e.id_MuscleGroup "
 		+ 	"WHERE g.id = ?;";
 
 	@Override
@@ -45,15 +45,15 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 					
 					last = groups.get(groups.size() - 1);
 
-					Exercice exercice = new Exercice();
+					Exercise exercise = new Exercise();
 
 					if ( last.getId() == rs.getInt("id") ) {
 						
-						exercice.setId(rs.getInt("id_exercice"));
-						exercice.setName(rs.getString("name_exercice"));
-						exercice.setNome(rs.getString("nome_exercice"));
+						exercise.setId(rs.getInt("id_exercise"));
+						exercise.setName(rs.getString("name_exercise"));
+						exercise.setNome(rs.getString("nome_exercise"));
 
-						last.getExercices().add(exercice);
+						last.getExercises().add(exercise);
 					}
 					else {
 
@@ -88,13 +88,13 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 
 				while ( rs.next() ) { 
 
-					Exercice exercice = new Exercice();
+					Exercise exercise = new Exercise();
 
-					exercice.setId(rs.getInt("id_exercice"));
-					exercice.setName(rs.getString("name_exercice"));
-					exercice.setNome(rs.getString("nome_exercice"));
+					exercise.setId(rs.getInt("id_exercise"));
+					exercise.setName(rs.getString("name_exercise"));
+					exercise.setNome(rs.getString("nome_exercise"));
 					
-					group.getExercices().add(exercice);
+					group.getExercises().add(exercise);
 				}
 
 			} catch (SQLException e) { e.printStackTrace(); }
@@ -106,19 +106,19 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 	private MuscleGroup processNewMuscleGroup(ResultSet rs) throws SQLException {
 		
 		MuscleGroup group = new MuscleGroup();
-		Exercice exercice = new Exercice();
-		List<Exercice> exercices = new ArrayList<Exercice>();
+		Exercise exercise = new Exercise();
+		List<Exercise> exercises = new ArrayList<Exercise>();
 		
 		group.setId(rs.getInt("id"));
 		group.setName(rs.getString("name"));
 		group.setNome(rs.getString("nome"));
 	
-		exercice.setId(rs.getInt("id_exercice"));
-		exercice.setName(rs.getString("name_exercice"));
-		exercice.setNome(rs.getString("nome_exercice"));
+		exercise.setId(rs.getInt("id_exercise"));
+		exercise.setName(rs.getString("name_exercise"));
+		exercise.setNome(rs.getString("nome_exercise"));
 
-		exercices.add(exercice);
-		group.setExercices(exercices);
+		exercises.add(exercise);
+		group.setExercises(exercises);
 		
 		return group;
 	}

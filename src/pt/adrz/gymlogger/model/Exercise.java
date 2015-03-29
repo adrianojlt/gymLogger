@@ -5,9 +5,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Exercice implements Serializable {
+public class Exercise implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+
+	public static final String ID 				= "id";
+	public static final String ID_MUSCLEGROUP 	= "id_musclegroup";
+	public static final String NAME 			= "name";
+	public static final String NOME 			= "nome";
 
 	private int id;
 	private String name;
