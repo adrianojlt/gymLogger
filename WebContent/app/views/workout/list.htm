@@ -11,7 +11,7 @@
 			      <th>Day</th>
 			      <th>Start</th>
 			      <th>End</th>
-			      <th>Groups</th>
+			      <th>Total</th>
 			      <th>Group(s) name(s)</th>
 			      <th>Exercises</th>
 			      <th>Repetitions</th>
@@ -25,7 +25,7 @@
 	    			<td>{{ workout.start | date }}</td>
 	    			<td>{{ workout.start | date: "h:mm a" }}</td>
 	    			<td>{{ workout.end | date: "h:mm a" }}</td>
-	    			<td>{{ numberOfGroups(workout); }}</td>
+	    			<td>{{ trainingTotalTime(workout) }}</td>
 	    			<td>{{ groupNames(workout,$index); }}</td>
 	    			<td>X</td>
 	    			<td>{{ totalRepetitions(workout); }}</td>
@@ -38,7 +38,7 @@
 	</div>
 
 	<div class="row">
-		<pre> {{ workouts[0]|json }} </pre>
+		<pre> {{ workouts|json }} </pre>
 	</div>
 
 </div>

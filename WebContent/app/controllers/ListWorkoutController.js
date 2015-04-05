@@ -16,18 +16,40 @@ function ListWorkoutController($scope,$http,globals) {
 
 	})();
 
-	$scope.numberOfGroups = function(workout) {
-		return "X";
-	};
-
 	$scope.totalRepetitions = function(workout) {
+		return 0;
 		return workout.repetitions.length;
 	};
 
+	$scope.trainingTotalTime = function(workout) {
+		
+		//var a = 1377005400000; //2013-07-20 15:30
+		//var b = 1377783900000; //2013-07-29 15:45 
+		var a = workout.start;
+		var b = workout.end;
+
+		var dateA = new Date(a);
+		var dateB = new Date(b);
+
+		var dayRelativeDifference = dateB.getHours()*60 + dateB.getMinutes() - dateA.getHours()*60 - dateA.getMinutes();
+		var absoluteDifference    = (b-a)/60
+
+		return absoluteDifference;
+	};
+
+
 	$scope.groupNames = function(workout,index) {
 
-		//console.log(index);
+		var names = "";
 
+		workout.groups.forEach(function(group,idx) {
+			names = names + group.name;
+			if ( !idx ) names = names + " ";
+		});
+
+		return names;
+
+		// old code ... 
 		var groups = [];
 		var counts = []; 
 

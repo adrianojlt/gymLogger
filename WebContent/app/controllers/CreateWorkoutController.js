@@ -150,8 +150,8 @@ function CreateWorkoutController($scope,$window,$http,$filter,globals) {
 	
 	$scope.cancel = function() {
 		//console.log($scope.workout[0].repetitions);
-		console.log($scope.wkt.start);
-		console.log($scope.wkt.end);
+		//console.log($scope.wkt.start);
+		//console.log($scope.wkt.end);
 		//console.log(new Date($scope.dateEnd.data));
 		//$window.dat = new Date($scope.dateEnd.data);
 		//$window.tim = $scope.hourEnd.data;
