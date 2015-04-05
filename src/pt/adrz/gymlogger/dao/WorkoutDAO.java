@@ -7,9 +7,10 @@ import pt.adrz.gymlogger.model.Workout;
 public interface WorkoutDAO {
 	
 	public List<Workout> getWorkoutsWithRepetitions();
+	public List<Workout> getWorkoutsWithGroups();
 	public List<Workout> getWorkouts();
 	public List<Workout> listAllWorkouts( int offset , int noOfRecords );
-	public Workout getWorkoutById(int id);
+	public Workout getWorkoutById(int id) throws Exception;
 	public Integer createWorkout(Workout workout);
 	public boolean removeWorkout(Workout workout);
 }

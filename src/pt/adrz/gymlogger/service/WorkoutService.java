@@ -40,7 +40,7 @@ public class WorkoutService {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getWorkout(@PathParam("id") int id) {
+	public Response getWorkout(@PathParam("id") int id) throws Exception {
 		Workout workout = workouts.getWorkoutById(id);
 		if ( workout == null ) { throw new WebApplicationException(Response.Status.NOT_FOUND); }
 		return Response.status(200).entity(workout).build();
