@@ -1,7 +1,10 @@
 package pt.adrz.gymlogger.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -20,6 +23,10 @@ public class Exercise implements Serializable {
 
 	private MuscleGroup muscleGroup;
 	private List<Repetition> repetitions;
+	
+	public Exercise() {
+		this.repetitions = new ArrayList<Repetition>();
+	}
 
 	public void setId(int id) { this.id = id; }
 	public int getId() { return this.id; }

@@ -2,6 +2,7 @@ package pt.adrz.gymlogger.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,12 @@ public class Workout implements Serializable {
 	private Timestamp end;
 	
 	private List<Repetition> repetitions;
+	private List<MuscleGroup> groups;
+	
+	public Workout() {
+		this.repetitions = new ArrayList<Repetition>();
+		this.groups = new ArrayList<MuscleGroup>();
+	}
 
 	public Integer getId() { return id; }
 	public void setId(Integer id) { this.id = id; }
@@ -34,4 +41,7 @@ public class Workout implements Serializable {
 
 	public List<Repetition> getRepetitions() { return repetitions; }
 	public void setRepetitions(List<Repetition> repetitions) { this.repetitions = repetitions; }
+
+	public List<MuscleGroup> getGroups() { return groups; }
+	public void setGroups(List<MuscleGroup> groups) { this.groups = groups; }
 }
