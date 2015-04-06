@@ -14,13 +14,13 @@ import javax.sql.DataSource;
 
 public class ConnectionFactory {
 	
-	private static final String CONTEXT_STRING = "java:/comp/env";
-	private static final String DATASOURCE_STRING = "jdbc/gymlogger";
+	public static final String CONTEXT_STRING = "java:/comp/env";
+	public static final String DATASOURCE_STRING = "jdbc/gymlogger";
 	
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/";
-	private static final String DATABASE = "gymlogger";
-	private static final String USER = "root";
-	private static final String PASS = "";
+	public static final String DB_URL = "jdbc:mysql://localhost:3306/";
+	public static final String DATABASE = "gymlogger";
+	public static final String USER = "root";
+	public static final String PASS = "";
 	
 	private static ConnectionFactory instance = null;
 	
@@ -49,6 +49,10 @@ public class ConnectionFactory {
 		
 		// conn to use without web server
 		return DriverManager.getConnection(DB_URL + DATABASE, USER, PASS);
+	}
+	
+	public static DataSource getDataSource() {
+		return src;
 	}
 	
 	//public static Connection getConn() throws SQLException { }
