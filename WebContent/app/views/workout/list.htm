@@ -1,9 +1,8 @@
 <div class="container">
 
-
 	<div class="row" st-table="workouts">
 
-		<table class="table table-hover responsiveTable">
+		<table class="table table responsiveTable">
 
 			<thead>
 			    <tr>
@@ -18,9 +17,9 @@
 			    </tr>
 	    	</thead>
 
-	    	<tbody>
+	    	<tbody ng-repeat="workout in workouts track by $index">
 
-	    		<tr class="" ng-repeat="workout in workouts track by $index">
+	    		<tr data-toggle="collapse" data-target="#wk{{workout.id}}" class="accordion-toggle">
 	    			<td>{{ workout.id }}</td>
 	    			<td>{{ workout.start | date }}</td>
 	    			<td>{{ workout.start | date: "h:mm a" }}</td>
@@ -31,6 +30,26 @@
 	    			<td>{{ totalRepetitions(workout); }}</td>
 	    		</tr>
 
+	    		<tr>
+	    			<td colspan="8" class="hiddenRow">
+
+	    				<div id="wk{{workout.id}}" class="accordian-body collapse">
+	    					<div class="row">
+
+	    						<div class="col-md-6">
+	    							cenas
+	    						</div>
+
+	    						<div class="col-md-6">
+	    							cenas2
+	    						</div>
+	    						
+	    					</div>
+	    				</div>
+
+	    			</td>
+	    		</tr>
+
 	    	</tbody>
 
 	    </table>
@@ -38,7 +57,9 @@
 	</div>
 
 	<div class="row">
+		<!--
 		<pre> {{ workouts|json }} </pre>
+		-->
 	</div>
 
 </div>
