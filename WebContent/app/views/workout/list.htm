@@ -2,7 +2,7 @@
 
 	<div class="row" st-table="workouts">
 
-		<table class="table table responsiveTable">
+		<table class="table responsiveTable">
 
 			<thead>
 			    <tr>
@@ -34,17 +34,49 @@
 	    			<td colspan="8" class="hiddenRow">
 
 	    				<div id="wk{{workout.id}}" class="accordian-body collapse">
+
 	    					<div class="row">
 
-	    						<div class="col-md-6">
-	    							cenas
+	    						<div class="" 
+	    							ng-repeat="group in workout.groups track by $index"
+	    							ng-class="{ 'col-md-8 col-md-offset-2':workout.groups.length == 1 , 'col-md-6':workout.groups.length > 1 }">
+
+	    							<h3>{{ group.name }}</h3>
+
+	    							<table class="table">
+
+	    								<thead>
+	    									<tr>
+	    										<th>#</th>
+	    										<th>id</th>
+	    										<th>name</th>
+	    										<th>num</th>
+	    										<th>weight</th>
+	    									</tr>
+	    								</thead>
+
+	    								<tbody ng-repeat="exercise in group.exercises track by $index">
+	    									<tr ng-repeat="rep in exercise.repetitions track by $index">
+	    										<td>{{ $index + 1 }}</td>
+	    										<td>{{ rep.id }}</td>
+	    										<td>{{ exercise.name }}</td>
+	    										<td>{{ rep.num }}</td>
+	    										<td>{{ rep.weight }} kg</td>
+	    									</tr>
+	    								</tbody>
+
+	    							</table>
+
 	    						</div>
 
+	    						<!--
 	    						<div class="col-md-6">
 	    							cenas2
 	    						</div>
-	    						
+	    						-->
+
 	    					</div>
+
 	    				</div>
 
 	    			</td>
