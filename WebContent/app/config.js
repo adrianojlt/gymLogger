@@ -29,6 +29,19 @@ app.config(['$routeProvider', function($routeProvider) {
         templateUrl: views + "workout/create.htm"
     })
     
+    // EXERCISES
+    .when("/exercise", {
+        controller: 'ExerciseController',
+        templateUrl: views + "exercise/exercises.htm"
+    })
+
+    // CALENDAR
+    .when("/calendar", {
+        controller: 'CalendarController',
+        templateUrl: views + "calendar/calendar.htm"
+    })
+    
+    
     // else 404
     .otherwise({
         templateUrl: views + "404.htm", 
