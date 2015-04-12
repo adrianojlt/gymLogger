@@ -17,7 +17,7 @@ import pt.adrz.gymlogger.model.Workout;
 public class WorkoutDAOJDBC implements WorkoutDAO {
 	
 	private static final String QUERY_GET_WORKOUTS = 
-		"SELECT id , start , end FROM workout ORDER BY id DESC LIMIT 20 OFFSET 0;";
+		"SELECT id , start , end FROM workout ORDER BY id DESC";
 
 	private static final String QUERY_GET_WORKOUTS_BY_ID = 
 		"SELECT id , start , end FROM workout WHERE id = ?;";
@@ -55,6 +55,8 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 
 			conn = ConnectionFactory.getConnection();
 			st = conn.createStatement();
+			st.setFetchSize(0);
+			st.setMaxRows(10);
 			rs = st.executeQuery(QUERY_GET_WORKOUTS);
 
 			while ( rs.next() ) { workouts.add(this.processWorkout(rs)); }

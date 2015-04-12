@@ -1,8 +1,8 @@
 <div class="container">
 
-	<div class="row" st-table="workouts">
+	<div class="row" >
 
-		<table class="table responsiveTable">
+		<table class="table responsiveTable" st-table="workouts" st-pipe="callServer">
 
 			<thead>
 			    <tr>
@@ -12,22 +12,30 @@
 			      <th>End</th>
 			      <th>Total</th>
 			      <th>Group(s) name(s)</th>
-			      <th>Exercises</th>
-			      <th>Repetitions</th>
+			      <th></th>
+			      <th></th>
 			    </tr>
 	    	</thead>
 
 	    	<tbody ng-repeat="workout in workouts track by $index">
 
-	    		<tr data-toggle="collapse" data-target="#wk{{workout.id}}" class="accordion-toggle">
+	    		<tr data-toggle="collapse" data-target="#wk{{workout.id}}" class="accordion-toggle" style="cursor:pointer;">
 	    			<td>{{ workout.id }}</td>
 	    			<td>{{ workout.start | date }}</td>
 	    			<td>{{ workout.start | date: "h:mm a" }}</td>
 	    			<td>{{ workout.end | date: "h:mm a" }}</td>
 	    			<td>{{ trainingTotalTime(workout) }}</td>
 	    			<td>{{ groupNames(workout,$index); }}</td>
-	    			<td>X</td>
-	    			<td>{{ totalRepetitions(workout); }}</td>
+	    			<td>
+	    				<a href="#/workout/create" class="btn btn-primary btn-xs">
+              				<span class="glyphicon glyphicon-pencil" title="Edit Workout"></span>
+            			</a>
+	    			</td>
+	    			<td>
+	    				<button class="btn btn-danger btn-xs delete-record" data-toggle="modal" data-target="#myModal" data-deleteurl="">
+              				<span class="glyphicon glyphicon-trash" title="Eliminar Workout"></span>
+            			</button>
+	    			</td>
 	    		</tr>
 
 	    		<tr>
@@ -42,6 +50,12 @@
 	    							ng-class="{ 'col-md-8 col-md-offset-2':workout.groups.length == 1 , 'col-md-6':workout.groups.length > 1 }">
 
 	    							<h3>{{ group.name }}</h3>
+
+	    							<!--
+	    							<a href="#/workout/create" class="btn btn-default"> 
+        								<span class="icon-new" title="new user">Edit</span>
+        							</a>
+        							-->
 
 	    							<table class="table">
 
@@ -83,6 +97,13 @@
 	    		</tr>
 
 	    	</tbody>
+
+	    	<tfoot>
+				<tr>
+					<td class="text-center" st-pagination="" st-items-by-page="5" colspan="4">
+					</td>
+				</tr>
+			</tfoot>
 
 	    </table>
 

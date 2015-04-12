@@ -8,9 +8,7 @@ gymApp.controller('ListWorkoutController', ['$scope','$http','globals',ListWorko
 function ListWorkoutController($scope,$http,globals) {
 
 
-	$http.get( globals.url + 'workouts' ).then(function(res) {
-		$scope.workouts = res.data;
-	});	
+	//$http.get( globals.url + 'workouts' ).then(function(res) {$scope.workouts = res.data; });
 
 	(function() {
 
@@ -22,7 +20,7 @@ function ListWorkoutController($scope,$http,globals) {
 	};
 
 	$scope.trainingTotalTime = function(workout) {
-		
+
 		//var a = 1377005400000; //2013-07-20 15:30
 		//var b = 1377783900000; //2013-07-29 15:45 
 		var a = workout.start;
@@ -77,6 +75,27 @@ function ListWorkoutController($scope,$http,globals) {
 		$scope.workouts[index].counts = counts;
 
 		return names;
+	};
+
+	$scope.callServer = function callServer(tableState) {
+
+		$scope.isLoading = true;
+
+    	var start = tableState.pagination.start 	|| 0;  	// This is NOT the page number, but the index of item in the list that you want to use to display the table.
+    	var count = tableState.pagination.number 	|| 10;	// Number of entries showed per page.
+
+    	var headers = { Range : start + '-' + count }
+
+    	$http.get( globals.url + 'workouts' , { headers: headers } ).then(function(res) {
+
+			$scope.workouts = res.data;
+
+			tableState.pagination.numberOfPages = 10;
+		});	
+
+		var pagination = tableState.pagination;
+		console.log(pagination);
+
 	};
 }
 

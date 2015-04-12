@@ -2,12 +2,12 @@
 
 var gymApp = angular.module('gymApp.workout');
 
-gymApp.controller('CreateWorkoutController', ['$scope','$window','$http','$filter','globals',CreateWorkoutController]);
+gymApp.controller('CreateWorkoutController', ['$scope','$window','$location','$http','$filter','globals',CreateWorkoutController]);
 
-function CreateWorkoutController($scope,$window,$http,$filter,globals) {
+function CreateWorkoutController($scope,$window,$location,$http,$filter,globals) {
 
 	console.log(globals);
-	
+
 	var self = this;
 
 	$scope.dateOptions = { 
@@ -17,6 +17,7 @@ function CreateWorkoutController($scope,$window,$http,$filter,globals) {
 
 	//$scope.dateStart = new Date().getTime();
 	
+	$scope.listPath = '/workout/list'; 
 	$scope.dateStart = {};
 	$scope.hourStart = {};
 	$scope.dateEnd = {};
@@ -140,21 +141,14 @@ function CreateWorkoutController($scope,$window,$http,$filter,globals) {
 			});
 		});
 
-		//console.log($scope.wkt);
-		//return;
-		
 		$http.post('http://localhost:9000/workouts',$scope.wkt).success(function(data, status, headers, config) {
-			console.log(status);
+			$location.path( $scope.listPath );
 		}).error(function(data, status, headers, config) { });
 	};
 	
 	$scope.cancel = function() {
 		//console.log($scope.workout[0].repetitions);
 		//console.log($scope.wkt.start);
-		//console.log($scope.wkt.end);
-		//console.log(new Date($scope.dateEnd.data));
-		//$window.dat = new Date($scope.dateEnd.data);
-		//$window.tim = $scope.hourEnd.data;
 	};
 }
 
