@@ -19,6 +19,9 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 	private static final String QUERY_GET_WORKOUTS = 
 		"SELECT id , start , end FROM workout ORDER BY id DESC";
 
+	private static final String QUERY_COUNT_WORKOUTS = 
+		"SELECT COUNT(*) FROM workout ORDER BY id DESC";
+
 	private static final String QUERY_GET_WORKOUTS_BY_ID = 
 		"SELECT id , start , end FROM workout WHERE id = ?;";
 
@@ -41,10 +44,21 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 	private static final String QUERY_INSERT_WORKOUT 	= "INSERT INTO Workout (id_User,start,end) VALUES (1,?,?);";
 	private static final String QUERY_INSERT_REPETITION = "INSERT INTO Repetition ( id_workout, id_exercise, weight, num ) VALUES (?,?,?,?);";
 
+	private int noOfRecords;
 	//private RepetitionDAO repetitionData;
 	
+	
+
 	@Override
 	public List<Workout> getWorkouts() {
+		return null;
+	}
+	
+	@Override
+	public int getNoOfRecords() { return noOfRecords; }
+
+	@Override
+	public List<Workout> getWorkouts(int start, int count) {
 		
 		List<Workout> workouts = new ArrayList<Workout>();
 		Connection conn = null;
@@ -54,16 +68,26 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		try {
 
 			conn = ConnectionFactory.getConnection();
-			st = conn.createStatement();
-			st.setFetchSize(0);
-			st.setMaxRows(10);
-			rs = st.executeQuery(QUERY_GET_WORKOUTS);
+
+			// JDBC statement as "Scroll Sensitive"
+			st = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+			
+			// For better performance It is recommend to set the following "hints" to the JDBC Driver:
+			st.setFetchSize(count);
+			st.setMaxRows(count);
+			
+			//rs = st.executeQuery(QUERY_GET_WORKOUTS);
+			//rs = st.executeQuery(QUERY_GET_WORKOUTS + " Limit " + (pageNum-1) * pageSize + ", " + pageSize);
+			rs = st.executeQuery(QUERY_GET_WORKOUTS + " Limit " + start + ", " + count);
 
 			while ( rs.next() ) { workouts.add(this.processWorkout(rs)); }
 
 			for ( Workout workout : workouts) { 
 				workout.setGroups(this.getGroups(workout));
 			}
+			
+			rs = st.executeQuery(QUERY_COUNT_WORKOUTS);
+			if(rs.next()) this.noOfRecords = rs.getInt(1);
 			
 		}
 		catch (SQLException eSQL) { eSQL.printStackTrace(); }
@@ -430,6 +454,7 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		try {
 
 			conn = ConnectionFactory.getConnection();
+			//conn.setAutoCommit(false);
 			ps = conn.prepareStatement(QUERY_INSERT_WORKOUT, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setTimestamp(1, new Timestamp(workout.getStart().getTime()));
@@ -439,7 +464,7 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 
 			ResultSet rs = ps.getGeneratedKeys();
 			if ( rs.next() ) workoutID = rs.getInt(1);
-			
+
 			List<Repetition> repetitions = workout.getRepetitions();
 			
 			for ( Repetition rep : repetitions ) {
@@ -452,10 +477,18 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 				ps.setInt(4, rep.getNum());
 
 				ps.executeUpdate();
+
+				
+				// using 'update batch'
+				//ps.addBatch();
+				//ps.executeBatch();
+				//conn.commit();
 			}
 
 		}
-		catch (SQLException eSQL) { eSQL.printStackTrace(); }
+		catch (SQLException eSQL) { 
+			eSQL.printStackTrace(); 
+		}
 		catch (Exception e) { e.printStackTrace(); }
 		finally { ConnectionFactory.close(conn); }
 

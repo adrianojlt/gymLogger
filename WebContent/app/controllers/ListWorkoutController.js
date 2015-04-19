@@ -90,7 +90,10 @@ function ListWorkoutController($scope,$http,globals) {
 
 			$scope.workouts = res.data;
 
-			tableState.pagination.numberOfPages = 10;
+			var itemsLength = res.headers('Content-Range');
+    		var totalItems = itemsLength.substring( itemsLength.indexOf('/') + 1 , itemsLength.length )
+
+			tableState.pagination.numberOfPages = Math.ceil(totalItems / count);
 		});	
 
 		var pagination = tableState.pagination;
