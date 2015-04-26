@@ -55,6 +55,7 @@ public class WorkoutsServerResource extends ServerResource {
 			    getResponse().getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, responseHeaders);
 			}
 			
+			// set headers
 			StringBuilder itemLength = new StringBuilder();
 			itemLength.append("items ");
 			itemLength.append(start);

@@ -12,7 +12,7 @@ public abstract class FactoryGym {
 		DB4O
 	}
 	
-	//public abstract Exercice getExerciceDAO(); 
+	public abstract ExerciseDAO getExerciseDAO(); 
 	public abstract MuscleGroupDAO getMuscleGroupDAO(); 
 	public abstract RepetitionDAO getRepetitionDAO();
 	public abstract WorkoutDAO getWorkoutDAO(); 

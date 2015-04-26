@@ -5,11 +5,7 @@ import org.restlet.Restlet;
 import org.restlet.routing.Router;
 
 import pt.adrz.gymlogger.filters.CustomHeaders;
-import pt.adrz.gymlogger.resources.ExercisesServerResource;
-import pt.adrz.gymlogger.resources.MuscleGroupServerResource;
-import pt.adrz.gymlogger.resources.MuscleGroupsServerResource;
-import pt.adrz.gymlogger.resources.WorkoutServerResource;
-import pt.adrz.gymlogger.resources.WorkoutsServerResource;
+import pt.adrz.gymlogger.resources.*;
 
 public class GymApp extends Application {
 
@@ -19,6 +15,14 @@ public class GymApp extends Application {
 		CustomHeaders headers = new CustomHeaders(this.getContext());
 		
 		Router router = new Router(this.getContext());
+
+		router.attach("/users", MuscleGroupsServerResource.class);
+		router.attach("/users/{id}", MuscleGroupsServerResource.class);
+
+		router.attach("/workouts", WorkoutsServerResource.class);
+		router.attach("/workouts/", WorkoutsServerResource.class);
+		router.attach("/workouts/{id}", WorkoutServerResource.class);
+		router.attach("/workouts/{id}/", WorkoutServerResource.class);
 		
 		router.attach("/groups", MuscleGroupsServerResource.class);
 		router.attach("/groups/", MuscleGroupsServerResource.class);
@@ -27,13 +31,8 @@ public class GymApp extends Application {
 
 		router.attach("/exercices", ExercisesServerResource.class);
 		router.attach("/exercices/", ExercisesServerResource.class);
-		router.attach("/exercices/{id}", ExercisesServerResource.class);
-		router.attach("/exercices/{id}/", ExercisesServerResource.class);
-
-		router.attach("/workouts", WorkoutsServerResource.class);
-		router.attach("/workouts/", WorkoutsServerResource.class);
-		router.attach("/workouts/{id}", WorkoutServerResource.class);
-		router.attach("/workouts/{id}/", WorkoutServerResource.class);
+		router.attach("/exercices/{id}", ExerciseServerResource.class);
+		router.attach("/exercices/{id}/", ExerciseServerResource.class);
 		
 		headers.setNext(router);
 
