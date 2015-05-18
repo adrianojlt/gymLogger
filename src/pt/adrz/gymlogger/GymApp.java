@@ -30,9 +30,9 @@ public class GymApp extends Application {
 		router.attach("/groups/{id}/", MuscleGroupServerResource.class);
 
 		router.attach("/exercices", ExercisesServerResource.class);
-		router.attach("/exercices/", ExercisesServerResource.class);
-		router.attach("/exercices/{id}", ExerciseServerResource.class);
-		router.attach("/exercices/{id}/", ExerciseServerResource.class);
+		router.attach("/exercises/", ExercisesServerResource.class);
+		router.attach("/exercises/{id}", ExerciseServerResource.class);
+		router.attach("/exercises/{id}/", ExerciseServerResource.class);
 		
 		headers.setNext(router);
 
