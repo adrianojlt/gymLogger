@@ -9,21 +9,27 @@
 
     	<div class="col-md-2">
 
-    		<div class="list-group">
-  				<a href="#" class="list-group-item active"> Legs </a>
-				<a href="#" class="list-group-item">Chest</a>
-				<a href="#" class="list-group-item">Biceps</a>
-				<a href="#" class="list-group-item">Triceps</a>
-				<a href="#" class="list-group-item">Shoulders</a>	
-			</div>
+      	<div class="list-group">
 
-        </div>
+          <a href="#" class="list-group-item" ng-repeat="group in groups track by $index"> {{ group.name }} </a>
 
-        <div class="col-md-8">
-        	right
-        </div>
+          <!--
+    			<a href="#" class="list-group-item active"> Legs </a>
+  				<a href="#" class="list-group-item">Chest</a>
+  				<a href="#" class="list-group-item">Biceps</a>
+  				<a href="#" class="list-group-item">Triceps</a>
+  				<a href="#" class="list-group-item">Shoulders</a>	
+          -->
+
+  			</div>
 
       </div>
+
+      <div class="col-md-8">
+      	right
+      </div>
+
+  </div>
 
   </div>
 </div>
