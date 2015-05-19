@@ -10,6 +10,9 @@ import pt.adrz.gymlogger.model.MuscleGroup;
 public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 
 	private static final String QUERY_GET_MUSCLEGROUPS = 
+			"SELECT id , name , nome FROM musclegroup;";
+
+	private static final String QUERY_GET_MUSCLEGROUPS_WITH_EXERCISES = 
 			"SELECT g.id , g.name , g.nome , e.id AS id_exercise , e.name AS name_exercise , e.nome AS nome_exercise  FROM Musclegroup g "
 		+ 	"INNER JOIN exercise e on g.id = e.id_MuscleGroup;";
 
@@ -20,7 +23,6 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 
 	@Override
 	public List<MuscleGroup> getMuscleGroups() {
-
 		List<MuscleGroup> groups = new ArrayList<MuscleGroup>();
 
 		Connection conn = null;
@@ -32,6 +34,34 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 			conn = ConnectionFactory.getConnection();
 			st = conn.createStatement();
 			rs = st.executeQuery(QUERY_GET_MUSCLEGROUPS);
+
+			while ( rs.next() ) { 
+				MuscleGroup group = new MuscleGroup();
+				group.setId(rs.getInt("id"));
+				group.setName(rs.getString("name"));
+				group.setNome(rs.getString("nome"));
+			}
+			
+		} catch (SQLException eSQL) { eSQL.printStackTrace(); }
+		finally { ConnectionFactory.close(rs, st, conn); }
+	
+		return groups;
+	}
+	
+	@Override
+	public List<MuscleGroup> getMuscleGroupsWithExercises() {
+
+		List<MuscleGroup> groups = new ArrayList<MuscleGroup>();
+
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+
+		try {
+
+			conn = ConnectionFactory.getConnection();
+			st = conn.createStatement();
+			rs = st.executeQuery(QUERY_GET_MUSCLEGROUPS_WITH_EXERCISES);
 
 			while ( rs.next() ) { 
 				
@@ -122,4 +152,6 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 		
 		return group;
 	}
+
+
 }

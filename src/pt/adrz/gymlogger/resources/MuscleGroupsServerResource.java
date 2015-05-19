@@ -30,7 +30,7 @@ public class MuscleGroupsServerResource extends ServerResource {
 		
 		try {
 
-			group = groupDAO.getMuscleGroups();
+			group = groupDAO.getMuscleGroupsWithExercises();
 			rep = new JacksonRepresentation<List<MuscleGroup>>(group); 
 			status = Status.SUCCESS_OK;
 
