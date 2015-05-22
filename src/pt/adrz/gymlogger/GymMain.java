@@ -13,7 +13,7 @@ public class GymMain {
 		
 		Component c = new Component();
 
-    	c.getServers().add(Protocol.HTTP,9000);
+    	c.getServers().add(Protocol.HTTP,9009);
     	c.getClients().add(Protocol.CLAP);
     	
     	VirtualHost host = c.getDefaultHost();
