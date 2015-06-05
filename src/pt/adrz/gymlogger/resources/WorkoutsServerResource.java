@@ -50,7 +50,6 @@ public class WorkoutsServerResource extends ServerResource {
 			Series<Header> responseHeaders = (Series<Header>) this.getResponse().getAttributes().get(HeaderConstants.ATTRIBUTE_HEADERS);
 			
 			if (responseHeaders == null) {
-			
 			    responseHeaders = new Series<Header>(Header.class);
 			    getResponse().getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, responseHeaders);
 			}
