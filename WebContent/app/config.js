@@ -41,7 +41,6 @@ app.config(['$routeProvider', function($routeProvider) {
         templateUrl: views + "calendar/calendar.htm"
     })
     
-    
     // else 404
     .otherwise({
         templateUrl: views + "404.htm", 
@@ -51,7 +50,25 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
-app.constant('globals', {url:'http://localhost:9009/'});
+app.config(['$httpProvider',function($httpProvider) {
+
+    $httpProvider.interceptors.push(function() {
+
+        var myInterceptor = {
+            request: function(config) {
+                //config.url = 'http://localhost:9009' + config.url;
+                //conf = config;
+                console.log(config.url);
+                return config;
+            }
+        };
+
+        return myInterceptor;
+    });
+
+}]);
+
+app.constant('globals', { url:'http://localhost:9009/'} );
 
 
 

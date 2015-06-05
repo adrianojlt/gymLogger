@@ -86,7 +86,7 @@ function ListWorkoutController($scope,$http,globals) {
 
     	var headers = { Range : start + '-' + count }
 
-    	$http.get( globals.url + 'workouts' , { headers: headers } ).then(function(res) {
+    	$http.get( globals.url + 'workouts' , { headers: headers } ).then( function(res) {
 
 			$scope.workouts = res.data;
 
@@ -97,8 +97,7 @@ function ListWorkoutController($scope,$http,globals) {
 		});	
 
 		var pagination = tableState.pagination;
-		console.log(pagination);
-
+		//console.log(pagination);
 	};
 }
 
