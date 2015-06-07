@@ -5,6 +5,10 @@
 
 var app = angular.module('gymApp'); 
 
+app.constant('globals', { 
+    url:'http://localhost:9009/'
+});
+
 // ngRoute
 app.config(['$routeProvider', function($routeProvider) {
 	
@@ -50,26 +54,34 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
+//app.config(['$stateProvider',function($stateProvider) {
+    //$stateProvider
+//}]);
+
 app.config(['$httpProvider',function($httpProvider) {
 
-    $httpProvider.interceptors.push(function() {
+    $httpProvider.interceptors.push(['$q','$location', function($q,$location) {
 
         var myInterceptor = {
+
             request: function(config) {
-                //config.url = 'http://localhost:9009' + config.url;
-                //conf = config;
-                console.log(config.url);
                 return config;
+            },
+
+            responseError: function(response) {
+
+                if  ( response.status === 401 || response.status === 403 ) {
+                    //$location.path('/login');
+                }
+
+                return $q.reject(response);
             }
         };
 
+        //console.log(myInterceptor);
+
         return myInterceptor;
-    });
-
+    }]);
 }]);
-
-app.constant('globals', { url:'http://localhost:9009/'} );
-
-
 
 })(window);
