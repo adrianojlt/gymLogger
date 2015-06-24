@@ -1,7 +1,8 @@
 (function(w) { 'use strict';
 
 // 'get' module
-var gymApp = angular.module('gymApp.workout');
+var gymApp = angular.module('gymApp.workout.list');
+//var gymApp = angular.module('gymApp.workout.list',[]);
 
 gymApp.controller('ListWorkoutController', ['$scope','$http','globals',ListWorkoutController]);
 
@@ -95,9 +96,6 @@ function ListWorkoutController($scope,$http,globals) {
 
 			tableState.pagination.numberOfPages = Math.ceil(totalItems / count);
 		});	
-
-		var pagination = tableState.pagination;
-		//console.log(pagination);
 	};
 }
 

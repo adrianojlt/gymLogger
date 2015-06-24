@@ -1,7 +1,8 @@
 (function(w) { 'use strict';
 
 
-var calendar = angular.module('gymApp.calendar');
+//var calendar = angular.module('gymApp.calendar');
+var calendar = angular.module('gymApp.calendar',['ui.calendar']);
 
 calendar.controller('CalendarController', ['$scope','$http',CalendarController]);
 
@@ -22,7 +23,10 @@ function CalendarController($scope,$http) {
 			eventResize : $scope.alertOnResize
 		}
 	};
-	
+
+	$scope.tmp = function() {
+		console.log('tmp');
+	};
 }
 
 })(window);

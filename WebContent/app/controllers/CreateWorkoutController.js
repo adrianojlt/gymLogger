@@ -1,6 +1,7 @@
 (function(w) { 'use strict';
 
-var gymApp = angular.module('gymApp.workout');
+var gymApp = angular.module('gymApp.workout.create');
+//var gymApp = angular.module('gymApp.workout.create',['ui.bootstrap','ui.bootstrap.datepicker','smart-table']);
 
 gymApp.controller('CreateWorkoutController', ['$scope','$window','$location','$http','$filter','globals',CreateWorkoutController]);
 
