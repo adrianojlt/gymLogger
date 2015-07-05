@@ -9,6 +9,7 @@
 
           <a href="#/exercises/group/{{group.id}}" class="list-group-item" 
             ng-repeat="group in groups track by $index"
+            ng-click="actions.changeGroup(group.id)"
             ng-class="{ active: actions.isActive(group.id) }"> {{ group.name }}
           </a>
         
@@ -16,26 +17,30 @@
 
       </div>
 
-      <div class="col-md-8" ng-show="!isGroupPage()">
+      <div class="col-md-8" ng-if="!isGroupPage()">
 
         <div class="row">
-          <div class="col-md-4" ng-repeat="group in groups track by $index">
-            {{ group.name }}
+          <div class="col-md-4" ng-repeat="row in groups track by $index">
+            {{ row.name }}
           </div>
           <div class="col-md-4">
             cenas
           </div>
         </div>
-        <!--
-        <button type="button" ng-click="click();">click</button>
-      	home page
-        -->
         <pre> {{groups|json}}</pre>
+
       </div>
 
-      <div class="col-md-8" ng-show="isGroupPage()">
-        content page
+
+      <div class="col-md-8" ng-if="isGroupPage()">
+        <pre> {{group|json}}</pre>
       </div>
+
+      <!--
+      <div class="col-md-8" content-page>
+        content
+      </div>
+      -->
 
   </div>
   
