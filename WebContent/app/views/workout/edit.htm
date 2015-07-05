@@ -1,0 +1,96 @@
+<div class="container">
+<form name="createForm">
+	
+	<div class="row">
+		edit form: {{workout.id}}
+		<editworkout></editworkout>
+	</div>
+
+	<div class="row page-header">
+
+		 <div class="col-md-2">
+
+	        <div class="form-group col-md-12">
+
+	           <a ng-click="actions.save(createFrom.$valid)" value="Save" class="btn btn-primary" ng-disabled="createForm.$invalid"> 
+	           		Edit 
+	           	</a>
+
+	           <a ng-click="actions.cancel()" value="Cancel" class="btn btn-default"> 
+	           		Cancel 
+	           	</a>
+
+	        </div>
+
+	    </div>
+	    
+	    <div class='col-md-10'>
+
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12">
+	            <div class="input-group">
+	                <input type="text" class="form-control" name="date_Start" placeholder="Inicio (AAAA/MM/DD)"
+	                    ng-model="dateStart.data"
+	                    date-disabled="disabled(date,mode)"
+	                    ng-change="dateStart.change();"
+	                    datepicker-popup="yyyy-MM-dd" 
+	                    datepicker-options="dateOptions" 
+	                    max-date="new"
+	                    is-open="dateStart.opened"
+	                    ng-click="dateStart.opened =! dateStart.opened"
+	                    ng-required="true" />
+	                <span class="input-group-addon" ng-click="dateStart.open($event)"><span class="glyphicon glyphicon-calendar"></span></span>
+	            </div>
+	        </div>
+	
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12">
+	          <div class="input-group">
+	                <input type="time" class="form-control" name="hourStart" value="" placeholder="hora inicio (HH:MM)"
+	                   ng-model="hourStart.data" 
+	                   ng-change="hourStart.change()" 
+	                   ng-required="false"/>
+	                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+	          </div>
+	        </div>
+	
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12 ">
+	            <div class="input-group">
+	                <input type="text" class="form-control" name="date_End" placeholder="Fim (AAAA/MM/DD)"
+	                   ng-model="dateEnd.data" 
+	                   date-disabled="disabled(date,mode)"
+	                   ng-change="dateEnd.change();"
+                       datepicker-popup="yyyy-MM-dd" 
+                       datepicker-options="dateOptions" 
+	                   is-open="dateEnd.opened"
+	                   ng-click="dateEnd.opened =! dateEnd.opened"
+	                   ng-required="true" />
+	                <span class="input-group-addon" ng-click="dateEnd.open($event)"><span class="glyphicon glyphicon-calendar"></span></span>
+	            </div>
+	        </div>
+	
+	        <div class="form-group col-md-3 col-sm-6 col-xs-12">
+	            <div class="input-group">
+	                <input type="time" class="form-control" name="hour_end" value="" placeholder="hora fim (HH:MM)"
+	                   ng-model="hourEnd.data" 
+	                   ng-change="hourEnd.change()" 
+	                   ng-required="false" />
+	                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+	            </div>
+	        </div>
+
+	    </div>
+
+	</div>
+
+
+
+	<div class="row">
+
+		<div class="" workout-exercises>
+		</div>
+
+		heere goes the loop
+		
+	</div>
+
+</form>
+</div>

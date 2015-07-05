@@ -1,6 +1,9 @@
 (function(w) { 'use strict';
 
+// 'get' module
 var gymApp = angular.module('gymApp.workout.create');
+
+// 'set' module
 //var gymApp = angular.module('gymApp.workout.create',['ui.bootstrap','ui.bootstrap.datepicker','smart-table']);
 
 gymApp.controller('CreateWorkoutController', ['$scope','$window','$location','$http','$filter','globals',CreateWorkoutController]);
@@ -89,7 +92,7 @@ function CreateWorkoutController($scope,$window,$location,$http,$filter,globals)
 	};
 	
 	$scope.hourStart.change = function() {
-		
+		//console.log($scope.hourStart.data);
 	};
 
 	$scope.hourEnd.change = function() {
@@ -112,10 +115,10 @@ function CreateWorkoutController($scope,$window,$location,$http,$filter,globals)
 		if ( $scope.workout[indice].repetitions.length > 1 ) $scope.workout[indice].repetitions.splice($index,1);
 	};
 
-	
-	$scope.save = function(valid) {
-		
-		$scope.wkt = {}; $scope.wkt.repetitions = [];
+	self.buildWorkout = function() {
+
+		$scope.wkt = {}; 
+		$scope.wkt.repetitions = [];
 
 		$scope.wkt.start = $scope.dateStart.data;
 		$scope.wkt.start.setHours($scope.hourStart.data.getHours());
@@ -141,15 +144,21 @@ function CreateWorkoutController($scope,$window,$location,$http,$filter,globals)
 				);
 			});
 		});
+	}
+	
+	$scope.save = function(valid) {
 
-		$http.post('http://localhost:9000/workouts',$scope.wkt).success(function(data, status, headers, config) {
+		self.buildWorkout();
+		
+		$http.post( globals.url + 'workouts' , $scope.wkt ).success(function(data, status, headers, config) {
 			$location.path( $scope.listPath );
 		}).error(function(data, status, headers, config) { });
 	};
 	
 	$scope.cancel = function() {
-		//console.log($scope.workout[0].repetitions);
-		//console.log($scope.wkt.start);
+		//$location.path( $scope.listPath );
+		self.buildWorkout();
+		console.log($scope.wkt);
 	};
 }
 

@@ -2,6 +2,7 @@
 
 var app = angular.module('gymApp', 
 	[
+	 	'gymApp.workout',
 	 	'gymApp.workout.list',
 	 	'gymApp.workout.create',
 	 	'gymApp.exercise',
@@ -12,7 +13,6 @@ var app = angular.module('gymApp',
 );
 
 app.controller('MainController', function( $scope , $location ) {
-	console.log('MainController');
 	$scope.isActive = function (viewLocation) {
         return (viewLocation === $location.path().substring(0,viewLocation.length));
     };

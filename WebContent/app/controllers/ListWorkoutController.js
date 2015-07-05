@@ -2,18 +2,31 @@
 
 // 'get' module
 var gymApp = angular.module('gymApp.workout.list');
+
+// 'set' module
 //var gymApp = angular.module('gymApp.workout.list',[]);
 
 gymApp.controller('ListWorkoutController', ['$scope','$http','globals',ListWorkoutController]);
+gymApp.controller('EditWorkoutController', ['$scope','$http','$routeParams','globals',EditWorkoutController]);
+gymApp.controller('DeleteWorkoutController', ['$scope','$http','$routeParams','globals',DeleteWorkoutController]);
+
+gymApp.directive('editworkout', ['$location',EditWorkout]);
+gymApp.directive('workoutExercises', ['$location',WorkoutExercises]);
 
 function ListWorkoutController($scope,$http,globals) {
 
+	$scope.actions = {};
 
 	//$http.get( globals.url + 'workouts' ).then(function(res) {$scope.workouts = res.data; });
 
 	(function() {
 
 	})();
+
+	$scope.actions.delete = function($event) {
+		console.log($event);
+		//$event.preventDefault();
+	};
 
 	$scope.totalRepetitions = function(workout) {
 		return 0;
@@ -97,6 +110,100 @@ function ListWorkoutController($scope,$http,globals) {
 			tableState.pagination.numberOfPages = Math.ceil(totalItems / count);
 		});	
 	};
+}
+
+function EditWorkoutController($scope,$http,$routeParams,globals) {
+
+	$scope.workout = {id:$routeParams.workoutID};
+
+	$scope.listPath = '/workout/list'; 
+	$scope.dateOptions = { formatYear: 'yy', startingDay: 1 };
+	$scope.actions = {};1
+	$scope.dateStart = {};
+	$scope.hourStart = {};
+	$scope.dateEnd = {};
+	$scope.hourEnd = {};
+
+	$scope.createForm = { $invalid: false };
+
+	$scope.dateStart.open = function($event) {
+    	$event.preventDefault();
+    	$event.stopPropagation();
+    	$scope.dateStart.opened = true;
+  	};
+
+	$scope.dateEnd.open = function($event) {
+    	$event.preventDefault();
+    	$event.stopPropagation();
+    	$scope.dateEnd.opened = true;
+  	};
+
+    $http.get( globals.url + 'workouts/' + $scope.workout.id ).then( function(res) {
+
+    	$scope.workout.data = res.data;
+    	$scope.createForm.$invalid = false;
+
+    	$scope.dateStart.data = $scope.workout.data.start;
+    	$scope.dateEnd.data = $scope.workout.data.end;
+    	$scope.hourStart.data = new Date($scope.workout.data.start);
+    	$scope.hourEnd.data = new Date($scope.workout.data.end);
+
+    },function(err) { } );
+
+    $scope.actions.save = function() {
+
+    };
+
+    $scope.actions.cancel = function() {
+    	console.log($scope.workout);
+    };
+}
+
+function DeleteWorkoutController($scope,$http,$routeParams,globals) {
+
+}
+
+function EditWorkout() {
+
+	return {
+
+		restrict: 'AE',
+		template: 'cenas e cenadas',
+
+    	link: function($scope, element, attrs, ctrl) {
+			ctrl.init(element);
+    	},
+
+		controller: function($scope) {
+
+			var self = this;
+
+			this.init = function(elem) {
+				//console.log(elem);
+			};
+		}
+	}
+}
+
+function WorkoutExercises() {
+
+	return {
+
+		restrict: 'AE',
+
+    	link: function($scope, element, attrs, ctrl) {
+			console.log('link');
+    	},
+
+		controller: function($scope) {
+
+			var self = this;
+
+			self.init = function(elem) {
+
+			};
+		}
+	}
 }
 
 })(window);

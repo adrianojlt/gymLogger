@@ -37,17 +37,25 @@ app.config(['$routeProvider', function($routeProvider) {
         controller: 'CreateWorkoutController',
         templateUrl: views + "workout/create.htm"
     })
+    .when("/workout/edit/:workoutID", {
+        controller: 'EditWorkoutController',
+        templateUrl: views + "workout/edit.htm"
+    })
+    .when("/workout/delete/:workoutID", {
+        controller: 'DeleteWorkoutController',
+        templateUrl: views + "workout/delete.htm"
+    })
     
     // EXERCISES
     .when("/exercises/", {
         controller: 'ExerciseController',
         templateUrl: views + "exercise/exercises.htm",
-        resolve: { content: function () { return false; } }
+        resolve: { oneGroup: function () { return false; } }
     })
     .when("/exercises/group/:groupID/", {
         controller: 'ExerciseController',
         templateUrl: views + "exercise/exercises.htm",
-        resolve: { content: function    () { return true; } }
+        resolve: { oneGroup: function () { return true; } }
     })
 
     // CALENDAR
