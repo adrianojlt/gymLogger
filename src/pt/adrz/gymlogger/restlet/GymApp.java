@@ -1,11 +1,11 @@
-package pt.adrz.gymlogger;
+package pt.adrz.gymlogger.restlet;
 
 import org.restlet.Application;
 import org.restlet.Restlet;
 import org.restlet.routing.Router;
 
-import pt.adrz.gymlogger.filters.CustomHeaders;
-import pt.adrz.gymlogger.resources.*;
+import pt.adrz.gymlogger.restlet.filters.CustomHeaders;
+import pt.adrz.gymlogger.restlet.resources.*;
 
 public class GymApp extends Application {
 

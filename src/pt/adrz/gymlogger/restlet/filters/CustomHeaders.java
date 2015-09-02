@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.filters;
+package pt.adrz.gymlogger.restlet.filters;
 
 import org.restlet.Context;
 import org.restlet.Request;

@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger;
+package pt.adrz.gymlogger.restlet;
 
 import org.restlet.Component;
 import org.restlet.data.Protocol;

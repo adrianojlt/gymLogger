@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.resources;
+package pt.adrz.gymlogger.restlet.resources;
 
 import org.restlet.data.Status;
 import org.restlet.ext.jackson.JacksonRepresentation;

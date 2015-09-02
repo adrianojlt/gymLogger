@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.resources;
+package pt.adrz.gymlogger.restlet.resources;
 
 import org.restlet.data.MediaType;
 import org.restlet.data.Status;
