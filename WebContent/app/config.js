@@ -8,7 +8,7 @@ var app = angular.module('gymApp');
 var ngroute;
 
 app.constant('globals', { 
-    url:'http://localhost:9009/'
+    url:'http://localhost:9009/api'
 });
 
 // ngRoute

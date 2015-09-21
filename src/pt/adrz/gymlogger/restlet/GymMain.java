@@ -18,10 +18,13 @@ public class GymMain {
     	
     	VirtualHost host = c.getDefaultHost();
 
-    	// Application
-    	GymApp gymApp = new GymApp();
+    	GymApi gymApp = new GymApi();
+    	GymWeb gymWeb = new GymWeb();
     	
-    	host.attachDefault(gymApp);
+    	host.attach("/api", gymApp);
+    	host.attach("/api/v1", gymApp);
+
+    	host.attachDefault(gymWeb);
     	
     	c.setDefaultHost(host);
     	c.start();

@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.restlet;
+package pt.adrz.gymlogger.service;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
