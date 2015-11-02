@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
+import pt.adrz.gymlogger.connection.ConnectionFactory;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 

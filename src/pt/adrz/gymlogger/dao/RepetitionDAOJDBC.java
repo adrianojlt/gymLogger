@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import pt.adrz.gymlogger.connection.ConnectionFactory;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 import pt.adrz.gymlogger.model.Repetition;

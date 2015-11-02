@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import pt.adrz.gymlogger.connection.ConnectionFactory;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
@@ -20,7 +21,7 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 	private DataSource datasource;
 	
 	private static final String SQL_QUERY_GET_ALL_EXERCICES = 
-		"SELECT id,name FROM exercice;";
+		"SELECT id,name FROM exercise;";
 
 	private static final String SQL_QUERY_GET_BY_ID = 
 		"SELECT id,name FROM exercice WHERE id = ?;";

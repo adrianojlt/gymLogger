@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.dao;
+package pt.adrz.gymlogger.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,10 +12,13 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 public class ConnectionFactory {
 	
 	public static final String CONTEXT_STRING = "java:/comp/env";
 	public static final String DATASOURCE_STRING = "jdbc/gymlogger";
+	public static final String DATASOURCE_NAME = "java:comp/env/jdbc/gymlogger";
 	
 	public static final String DB_URL = "jdbc:mysql://localhost:3306/";
 	public static final String DATABASE = "gymlogger";
@@ -29,12 +32,11 @@ public class ConnectionFactory {
 	private ConnectionFactory() {
 
 		try {
-			Context initContext = new InitialContext();
-			Context envContext  = (Context)initContext.lookup(ConnectionFactory.CONTEXT_STRING);
-			src = (DataSource)envContext.lookup(ConnectionFactory.DATASOURCE_STRING);
+			Context ctx = new InitialContext();
+			src = (DataSource)ctx.lookup(DATASOURCE_NAME);
 		}
 		catch (NamingException eN) {
-			eN.printStackTrace();
+			//eN.printStackTrace();
 		}
 	}
 	
@@ -44,18 +46,32 @@ public class ConnectionFactory {
 	}
 	
 	public static Connection getConnection() throws SQLException {
-		//if ( instance == null ) { instance = new ConnectionFactory(); }
-		//return src.getConnection();
 		
-		// conn to use without web server
-		return DriverManager.getConnection(DB_URL + DATABASE, USER, PASS);
+		if ( instance == null ) { 
+			instance = new ConnectionFactory(); 
+		}
+
+		Connection conn = null; 
+		
+		try {
+
+			if ( src == null ) {
+				// conn to use without web server
+				conn = DriverManager.getConnection(DB_URL + DATABASE, USER, PASS);
+			}
+			else {
+				conn = src.getConnection();
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return conn;
 	}
 	
 	public static DataSource getDataSource() {
 		return src;
 	}
-	
-	//public static Connection getConn() throws SQLException { }
 	
 	public static void close(ResultSet rs) {
 		if ( rs == null) return;

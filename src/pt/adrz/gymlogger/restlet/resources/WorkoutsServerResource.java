@@ -90,7 +90,8 @@ public class WorkoutsServerResource extends ServerResource {
 			jWorkout = new JacksonRepresentation<Workout>(representation, Workout.class);
 			workout = jWorkout.getObject();
 			
-			if ( workout.getRepetitions() == null || workout.getRepetitions().isEmpty() ) throw new NullPointerException("empty repetitions");
+			if ( workout.getRepetitions() == null || workout.getRepetitions().isEmpty() ) 
+				throw new NullPointerException("empty repetitions");
 			
 			workoutID = this.workoutsDAO.createWorkout(workout);
 
