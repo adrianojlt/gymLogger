@@ -34,8 +34,10 @@
     </servlet>  
     
     <servlet-mapping>  
+
         <servlet-name>RestletServlet</servlet-name>  
         <url-pattern>/restlet/*</url-pattern>  
+
     </servlet-mapping>  
 	
 
@@ -48,8 +50,10 @@
 
 		<init-param>
 
+           <!--
 	       <param-name>javax.ws.rs.Application</param-name>
            <param-value>pt.adrz.gymlogger.GymloggerRestApplication</param-value>
+           -->
 
 		   <param-name>jersey.config.server.provider.packages</param-name>
 		   <param-value>pt.adrz.gymlogger.service</param-value>
@@ -61,10 +65,11 @@
 	</servlet>
 
 	<servlet-mapping>
+
 		<servlet-name>JerseyServlet</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
+
 	</servlet-mapping>
-	
    
 
 	<!-- Resources -->
