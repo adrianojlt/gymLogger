@@ -1,0 +1,122 @@
+{
+	"id": "145d3da6-e6ee-5f39-c006-40c62de83b82",
+	"name": "GymLogger",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "7e876f4f-90c1-178d-d469-019879c0d0f0",
+			"name": "Restlet",
+			"description": "Api using RESTlet",
+			"order": [
+				"c3922f2c-82b6-fb2e-a5b9-1098dee83c40",
+				"b8796118-7b10-5b96-804f-d52490c406db",
+				"42b008ea-e2e5-1ed9-d5aa-53884f38710b"
+			],
+			"owner": 0
+		},
+		{
+			"id": "49becf95-044f-ad0e-3133-4586911d5b96",
+			"name": "jersey",
+			"description": "calls for jersey implementation",
+			"order": [
+				"1672f5f4-6d04-3362-fe1a-594ef96cccf9"
+			],
+			"owner": 0
+		}
+	],
+	"timestamp": 1427041253958,
+	"owner": 0,
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "1672f5f4-6d04-3362-fe1a-594ef96cccf9",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:8080/gymlogger/rest/exercices",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"collectionId": "145d3da6-e6ee-5f39-c006-40c62de83b82",
+			"data": [],
+			"dataMode": "params",
+			"name": "exercices",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1445469970020,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"folder": "49becf95-044f-ad0e-3133-4586911d5b96"
+		},
+		{
+			"id": "42b008ea-e2e5-1ed9-d5aa-53884f38710b",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:9009/api/groups",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1442667189209,
+			"name": "groups",
+			"description": "",
+			"collectionId": "145d3da6-e6ee-5f39-c006-40c62de83b82",
+			"responses": [],
+			"folder": "7e876f4f-90c1-178d-d469-019879c0d0f0",
+			"isFromCollection": true,
+			"collectionRequestId": "42b008ea-e2e5-1ed9-d5aa-53884f38710b"
+		},
+		{
+			"id": "b8796118-7b10-5b96-804f-d52490c406db",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:9000/api/workouts",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1442667205810,
+			"name": "workouts",
+			"description": "",
+			"collectionId": "145d3da6-e6ee-5f39-c006-40c62de83b82",
+			"responses": [],
+			"folder": "7e876f4f-90c1-178d-d469-019879c0d0f0",
+			"isFromCollection": true,
+			"collectionRequestId": "b8796118-7b10-5b96-804f-d52490c406db",
+			"rawModeData": " {\r\n  \"repetitions\": [],\r\n  \"start\": \"2015-03-22T00:00:00.000Z\",\r\n  \"end\": \"2015-03-22T00:00:00.000Z\"\r\n}"
+		},
+		{
+			"id": "c3922f2c-82b6-fb2e-a5b9-1098dee83c40",
+			"headers": "Content-Type: application/json\n",
+			"url": "http://localhost:9009/api/workouts",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1442667198220,
+			"name": "workouts",
+			"description": "",
+			"collectionId": "145d3da6-e6ee-5f39-c006-40c62de83b82",
+			"responses": [],
+			"folder": "7e876f4f-90c1-178d-d469-019879c0d0f0",
+			"isFromCollection": true,
+			"collectionRequestId": "c3922f2c-82b6-fb2e-a5b9-1098dee83c40"
+		}
+	]
+}
