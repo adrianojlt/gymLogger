@@ -8,14 +8,16 @@ var app = angular.module('gymApp');
 var ngroute;
 
 app.constant('globals', { 
-    url:'http://localhost:9009/api'
+    url:'http://localhost:9009/api/'
+    //url:'http://localhost:8080/gymlogger/rest/'
+    //url:'http://localhost:8080/gymlogger/restlet/'
 });
 
 // ngRoute
 app.config(['$routeProvider', function($routeProvider) {
 	
     var views = '/app/views/';
-    //views = '/gymlogger/' + views; // ... for apache tomcat
+    views = '/gymlogger/' + views; // ... for apache tomcat
     
     //ngroute(null);
     //return;
