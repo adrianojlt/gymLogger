@@ -1,0 +1,2 @@
+- check server properties -> switch location when error 404 appear for no reason
+- postman api calls sync with postman account
