@@ -12,6 +12,7 @@ gymApp.controller('DeleteWorkoutController', ['$scope','$http','$routeParams','g
 
 gymApp.directive('editworkout', ['$location',EditWorkout]);
 gymApp.directive('workoutExercises', ['$location',WorkoutExercises]);
+gymApp.directive('collapseWorkout', ['$location',CollapseWorkout]);
 
 function ListWorkoutController($scope,$http,globals) {
 
@@ -99,6 +100,7 @@ function ListWorkoutController($scope,$http,globals) {
     	var count = tableState.pagination.number 	|| 10;	// Number of entries showed per page.
 
     	var headers = { Range : start + '-' + count }
+    	//console.log(headers,'headers');
 
     	$http.get( globals.url + 'workouts' , { headers: headers } ).then( function(res) {
 

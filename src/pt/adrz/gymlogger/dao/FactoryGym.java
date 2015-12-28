@@ -32,6 +32,25 @@ public abstract class FactoryGym {
 				return null;
 		}
 	}
+
+	public static ExerciseDAO getExerciseDAO( STORAGE_TYPE whichFactory ) {
+
+		switch (whichFactory) {
+		
+			case MYSQL_JDBC:
+				return new ExerciseDAOJDBC();
+			case MYSQL_SPRING_JDBC:
+				return null;
+			case ORACLE:
+				return null;
+			case MSSQL:
+				return null;
+			case DB4O:
+				return null;
+			default:
+				return null;
+		}
+	}
 	
 	public static WorkoutDAO getWorkoutDAO( STORAGE_TYPE whichFactory ) {
 		

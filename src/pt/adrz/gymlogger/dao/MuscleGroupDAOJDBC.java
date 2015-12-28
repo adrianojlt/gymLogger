@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+
 import pt.adrz.gymlogger.connection.ConnectionFactory;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
@@ -24,6 +27,7 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 
 	@Override
 	public List<MuscleGroup> getMuscleGroups() {
+
 		List<MuscleGroup> groups = new ArrayList<MuscleGroup>();
 
 		Connection conn = null;
@@ -37,14 +41,23 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 			rs = st.executeQuery(QUERY_GET_MUSCLEGROUPS);
 
 			while ( rs.next() ) { 
+
 				MuscleGroup group = new MuscleGroup();
+
 				group.setId(rs.getInt("id"));
 				group.setName(rs.getString("name"));
 				group.setNome(rs.getString("nome"));
+
+				groups.add(group);
 			}
 			
-		} catch (SQLException eSQL) { eSQL.printStackTrace(); }
-		finally { ConnectionFactory.close(rs, st, conn); }
+		} catch (SQLException eSQL) { 
+			eSQL.printStackTrace(); 
+			throw new WebApplicationException("some error", Response.Status.INTERNAL_SERVER_ERROR);
+		}
+		finally { 
+			ConnectionFactory.close(rs, st, conn); 
+		}
 	
 		return groups;
 	}
@@ -115,7 +128,12 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 				ps.setInt( 1 , id );	
 				rs = ps.executeQuery();
 				
-				if ( rs.next() ) group = this.processNewMuscleGroup(rs);
+				if ( rs.next() ) {
+					group = this.processNewMuscleGroup(rs);
+				}
+				else {
+					return null;
+				}
 
 				while ( rs.next() ) { 
 
@@ -128,8 +146,12 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 					group.getExercises().add(exercise);
 				}
 
-			} catch (SQLException e) { e.printStackTrace(); }
-			finally { ConnectionFactory.close(rs,ps,conn); }
+			} catch (SQLException e) { 
+				e.printStackTrace(); 
+			}
+			finally { 
+				ConnectionFactory.close(rs,ps,conn); 
+			}
 
 		return group;
 	}
@@ -153,6 +175,4 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 		
 		return group;
 	}
-
-
 }

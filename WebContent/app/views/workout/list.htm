@@ -19,7 +19,7 @@
 
 	    	<tbody ng-repeat="workout in workouts track by $index">
 
-	    		<tr data-toggle="collapse" data-target="#wk{{workout.id}}" class="accordion-toggle" style="cursor:pointer;">
+	    		<tr data-toggle="collapse" data-target="#wk{{workout.id}}" class="accordion-toggle collapsed" style="cursor:pointer;">
 	    			<td>{{ workout.id }}</td>
 	    			<td>{{ workout.start | date }}</td>
 	    			<td>{{ workout.start | date: "h:mm a" }}</td>
@@ -41,7 +41,7 @@
 	    		<tr>
 	    			<td colspan="8" class="hiddenRow">
 
-	    				<div id="wk{{workout.id}}" class="accordian-body collapse">
+	    				<div id="wk{{workout.id}}" class="accordian-body collapse" collapse-workout>
 
 	    					<div class="row">
 

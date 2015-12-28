@@ -12,12 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.Factory;
-
-import pt.adrz.gymlogger.dao.ExerciceFactory;
 import pt.adrz.gymlogger.dao.FactoryGym;
 import pt.adrz.gymlogger.dao.WorkoutDAO;
-import pt.adrz.gymlogger.dao.WorkoutDAOJDBC;
 import pt.adrz.gymlogger.model.Workout;
 
 /**

@@ -15,13 +15,13 @@ import pt.adrz.gymlogger.model.MuscleGroup;
 public class ExerciseDAOJDBC implements ExerciseDAO {
 	
 	private static final String SQL_QUERY_GET_ALL_EXERCICES = 
-		"SELECT id,name FROM exercice;";
+		"SELECT id,name FROM exercise;";
 
 	private static final String SQL_QUERY_GET_BY_ID = 
-		"SELECT id,name FROM exercice WHERE id = ?;";
+		"SELECT id,name FROM exercise WHERE id = ?;";
 
 	private static final String SQL_QUERY_GET_BY_MUSCLEGROUPID = 
-		"SELECT id,name FROM exercice WHERE id_musclegroup = ?;";
+		"SELECT id,name FROM exercise WHERE id_musclegroup = ?;";
 
 	@Override
 	public List<Exercise> listAllExercices() {

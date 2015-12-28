@@ -5,7 +5,7 @@ import java.util.List;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
-public abstract class ExerciceFactory {
+public abstract class ExerFactory {
 	
 	public static final int MYSQL_JDBC = 1;
 	public static final int MYSQL_SPRING_JDBC = 2;
@@ -17,10 +17,10 @@ public abstract class ExerciceFactory {
 	public abstract List<Exercise> getExercicesByMuscleGroupId(int id);
 	public abstract List<MuscleGroup> listAllMuscleGroups();
 	
-	public static ExerciceFactory getDAOFactory(int whichFactory) {
+	public static ExerFactory getDAOFactory(int whichFactory) {
 
 		switch (whichFactory) {
-			case MYSQL_JDBC: 				return new ExerciceDAOJDBC();
+			case MYSQL_JDBC: 				return new ExerDAOJDBC();
 			case MYSQL_SPRING_JDBC: 		return null;
 			case MYSQL_JPA: 				return null;
 			case MYSQL_HIBERNATE: 			return null;

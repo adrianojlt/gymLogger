@@ -15,7 +15,7 @@ import pt.adrz.gymlogger.connection.ConnectionFactory;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
-public class ExerciceDAOJDBC extends ExerciceFactory {
+public class ExerDAOJDBC extends ExerFactory {
 
 	@Resource(name = "jdbc/gymlogger")
 	private DataSource datasource;
@@ -29,7 +29,7 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 	private static final String SQL_QUERY_GET_BY_MUSCLEGROUPID = 
 		"SELECT id,name FROM exercice WHERE id_musclegroup = ?;";
 	
-	public ExerciceDAOJDBC() {
+	public ExerDAOJDBC() {
 		
 	}
 	
@@ -53,7 +53,7 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 		try {
 			conn = ConnectionFactory.getConnection();
 			st = conn.createStatement();
-			rs = st.executeQuery(ExerciceDAOJDBC.SQL_QUERY_GET_ALL_EXERCICES);
+			rs = st.executeQuery(ExerDAOJDBC.SQL_QUERY_GET_ALL_EXERCICES);
 			while ( rs.next() ) { list.add(this.processExercice(rs)); }
 		}
 		catch (SQLException eSQL) { eSQL.printStackTrace(); }
@@ -78,7 +78,7 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 		try {
 
             conn = ConnectionFactory.getConnection();
-            ps = conn.prepareStatement(ExerciceDAOJDBC.SQL_QUERY_GET_BY_ID);
+            ps = conn.prepareStatement(ExerDAOJDBC.SQL_QUERY_GET_BY_ID);
             ps.setInt(1, id);
             rs = ps.executeQuery();
 
@@ -105,7 +105,7 @@ public class ExerciceDAOJDBC extends ExerciceFactory {
 		
 		try {
 			conn = ConnectionFactory.getConnection();
-            PreparedStatement ps = conn.prepareStatement(ExerciceDAOJDBC.SQL_QUERY_GET_BY_MUSCLEGROUPID);
+            PreparedStatement ps = conn.prepareStatement(ExerDAOJDBC.SQL_QUERY_GET_BY_MUSCLEGROUPID);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 			while ( rs.next() ) { list.add(this.processExercice(rs)); }

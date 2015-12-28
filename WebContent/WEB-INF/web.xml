@@ -50,13 +50,13 @@
 
 		<init-param>
 
-           <!--
 	       <param-name>javax.ws.rs.Application</param-name>
-           <param-value>pt.adrz.gymlogger.GymloggerRestApplication</param-value>
-           -->
+           <param-value>pt.adrz.gymlogger.service.GymloggerRestApplication</param-value>
 
+           <!--
 		   <param-name>jersey.config.server.provider.packages</param-name>
 		   <param-value>pt.adrz.gymlogger.service</param-value>
+		   -->
 
 		</init-param>
 
