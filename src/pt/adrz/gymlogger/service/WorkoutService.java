@@ -26,26 +26,31 @@ import pt.adrz.gymlogger.model.Workout;
 @Path("/workouts")
 public class WorkoutService {
 	
-	private WorkoutDAO workouts;
-	private RepetitionDAO repetitions;
+	private WorkoutDAO workoutsDAO;
+	private RepetitionDAO repetitionsDAO;
 	
 	public WorkoutService() {
-		workouts = new WorkoutDAOJDBC();
-		repetitions = new RepetitionDAOJDBC();
+		workoutsDAO = new WorkoutDAOJDBC();
+		repetitionsDAO = new RepetitionDAOJDBC();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON) 
 	public List<Workout> getWorkouts() {
-		return workouts.getWorkoutsWithRepetitions();
+		return workoutsDAO.getWorkoutsWithRepetitions();
 	}
 	
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getWorkout(@PathParam("id") int id) throws Exception {
-		Workout workout = workouts.getWorkoutById(id);
-		if ( workout == null ) { throw new WebApplicationException(Response.Status.NOT_FOUND); }
+
+		Workout workout = workoutsDAO.getWorkoutById(id);
+
+		if ( workout == null ) { 
+			throw new WebApplicationException(Response.Status.NOT_FOUND); 
+		}
+
 		return Response.status(200).entity(workout).build();
 	}
 	
@@ -62,7 +67,7 @@ public class WorkoutService {
 	@Path("/repetitions")
 	@Produces(MediaType.APPLICATION_JSON) 
 	public List<Repetition> getRepetitions() {
-		return repetitions.getRepetitions();
+		return repetitionsDAO.getRepetitions();
 	}
 	
 	@GET

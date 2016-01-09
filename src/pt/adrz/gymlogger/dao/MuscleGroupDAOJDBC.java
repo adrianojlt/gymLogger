@@ -148,6 +148,7 @@ public class MuscleGroupDAOJDBC implements MuscleGroupDAO {
 
 			} catch (SQLException e) { 
 				e.printStackTrace(); 
+				throw new WebApplicationException("musclegroup not found", Response.Status.NOT_FOUND);
 			}
 			finally { 
 				ConnectionFactory.close(rs,ps,conn); 

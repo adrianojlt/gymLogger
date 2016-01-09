@@ -12,8 +12,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-
 public class ConnectionFactory {
 	
 	public static final String CONTEXT_STRING = "java:/comp/env";
@@ -41,22 +39,25 @@ public class ConnectionFactory {
 	}
 	
 	public static ConnectionFactory getInstance() {
-		if ( ConnectionFactory.instance == null ) { ConnectionFactory.instance = new ConnectionFactory(); }
+
+		if ( ConnectionFactory.instance == null ) { 
+			ConnectionFactory.instance = new ConnectionFactory(); 
+		}
+
 		return ConnectionFactory.instance;
 	}
 	
 	public static Connection getConnection() throws SQLException {
 		
+		Connection conn = null; 
+
 		if ( instance == null ) { 
 			instance = new ConnectionFactory(); 
 		}
-
-		Connection conn = null; 
 		
 		try {
 
-			if ( src == null ) {
-				// conn to use without web server
+			if ( src == null ) { // conn to use without web server
 				conn = DriverManager.getConnection(DB_URL + DATABASE, USER, PASS);
 			}
 			else {

@@ -54,14 +54,15 @@ public class WorkoutsServerResource extends ServerResource {
 			    getResponse().getAttributes().put(HeaderConstants.ATTRIBUTE_HEADERS, responseHeaders);
 			}
 			
-			// set headers
 			StringBuilder itemLength = new StringBuilder();
+
 			itemLength.append("items ");
 			itemLength.append(start);
 			itemLength.append("-");
 			itemLength.append((start + workouts.size() - 1));
 			itemLength.append("/");
 			itemLength.append(workoutsDAO.getNoOfRecords());
+
 			responseHeaders.add(new Header("Content-Range", itemLength.toString()));
 
 			rep = new JacksonRepresentation<List<Workout>>(workouts); 
