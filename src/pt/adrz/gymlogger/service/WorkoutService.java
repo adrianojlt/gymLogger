@@ -22,7 +22,6 @@ import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.Repetition;
 import pt.adrz.gymlogger.model.Workout;
 
-//@ApplicationPath("rest")
 @Path("/workouts")
 public class WorkoutService {
 	
@@ -57,10 +56,17 @@ public class WorkoutService {
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
-	public Response createWorkout(String representation) {
-		//Integer createdWorkoutID = workouts.createWorkout(representation);
-		//return Response.status(Response.Status.CREATED).entity("New workout created " + createdWorkoutID).header("idCreated", String.valueOf(createdWorkoutID)).build();
-		return null;
+	public Response createWorkout(Workout workout) {
+		
+		try {
+			this.workoutsDAO.createWorkout(workout);
+		}
+		catch (Exception e) {
+			throw new WebApplicationException(e.getMessage(), Response.Status.INTERNAL_SERVER_ERROR);
+		}
+
+		//System.out.println("start: " + workout.getStart() + " end: " + workout.getEnd());
+		return Response.status(Response.Status.CREATED).entity(workout).build();
 	}
 
 	@GET
