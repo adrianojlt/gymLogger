@@ -19,11 +19,12 @@ import pt.adrz.gymlogger.model.MuscleGroup;
 @Path("/musclegroup")
 public class MuscleGroupService {
 	
-	private MuscleGroupDAO musclegroup;
-	private ExerciseDAO exercise = FactoryGym.getExerciseDAO(FactoryGym.STORAGE_TYPE.MYSQL_JDBC);
+	private MuscleGroupDAO musclegroupDAO;
+	private ExerciseDAO exerciseDAO;
 	
 	public MuscleGroupService() {
-		this.musclegroup = new MuscleGroupDAOJDBC();
+		this.musclegroupDAO = new MuscleGroupDAOJDBC();
+		this.exerciseDAO = FactoryGym.getExerciseDAO(FactoryGym.STORAGE_TYPE.MYSQL_JDBC);
 	}
 
 	@GET
@@ -31,9 +32,9 @@ public class MuscleGroupService {
 	public List<MuscleGroup> getMuscleGroups(@HeaderParam("exercises")Boolean exercises) {
 
 		if ( exercises != null && exercises ) 
-			return this.musclegroup.getMuscleGroupsWithExercises();
+			return this.musclegroupDAO.getMuscleGroupsWithExercises();
 		else 
-			return this.musclegroup.getMuscleGroups();
+			return this.musclegroupDAO.getMuscleGroups();
 	}
 	
 	@GET
@@ -41,7 +42,7 @@ public class MuscleGroupService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getMuscleGroup(@PathParam("id") int id) throws Exception {
 
-		MuscleGroup group = musclegroup.getMuscleGroup(id);
+		MuscleGroup group = musclegroupDAO.getMuscleGroup(id);
 
 		if ( group == null ) { 
 			return Response.status(Response.Status.NOT_FOUND).entity(group).build();
@@ -54,6 +55,6 @@ public class MuscleGroupService {
 	@Path("{id}/exercises")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getExercisesByMuscleGroup(@PathParam("id") int id) throws Exception {
-		return Response.status(200).entity(exercise.getExercicesByMuscleGroupId(id)).build();
+		return Response.status(200).entity(exerciseDAO.getExercicesByMuscleGroupId(id)).build();
 	}
 }

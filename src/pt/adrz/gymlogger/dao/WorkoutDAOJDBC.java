@@ -48,8 +48,6 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 	private int noOfRecords;
 	//private RepetitionDAO repetitionData;
 	
-	
-
 	@Override
 	public List<Workout> getWorkouts() {
 		return null;
@@ -59,7 +57,7 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 	public int getNoOfRecords() { return noOfRecords; }
 
 	@Override
-	public List<Workout> getWorkouts(int start, int count) {
+	public List<Workout> getWorkouts(Integer start, Integer count) {
 		
 		List<Workout> workouts = new ArrayList<Workout>();
 		Connection conn = null;
@@ -73,22 +71,25 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 			// JDBC statement as "Scroll Sensitive"
 			st = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			
-			// For better performance It is recommend to set the following "hints" to the JDBC Driver:
+			// For better performance It is recommend to set 
+			// the following "hints" to the JDBC Driver:
 			st.setFetchSize(count);
 			st.setMaxRows(count);
 			
-			//rs = st.executeQuery(QUERY_GET_WORKOUTS);
-			//rs = st.executeQuery(QUERY_GET_WORKOUTS + " Limit " + (pageNum-1) * pageSize + ", " + pageSize);
 			rs = st.executeQuery(QUERY_GET_WORKOUTS + " Limit " + start + ", " + count);
 
-			while ( rs.next() ) { workouts.add(this.processWorkout(rs)); }
+			while ( rs.next() ) { 
+				workouts.add(this.processWorkout(rs)); 
+			}
 
 			for ( Workout workout : workouts) { 
 				workout.setGroups(this.getGroups(workout));
 			}
 			
 			rs = st.executeQuery(QUERY_COUNT_WORKOUTS);
-			if(rs.next()) this.noOfRecords = rs.getInt(1);
+
+			if ( rs.next() ) 
+				this.noOfRecords = rs.getInt(1);
 			
 		}
 		catch (SQLException eSQL) { eSQL.printStackTrace(); }
