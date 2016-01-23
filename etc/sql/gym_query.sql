@@ -8,7 +8,7 @@ select * from user;
 select * from workout;
 select * from exercise;
 
-select * from repetition where id_Exercice >= 300 and id_Exercice <= 400;
+select * from repetition where id_Exercise >= 300 and id_Exercise <= 400;
 select * from repetition where id_workout = 40;
 
 
