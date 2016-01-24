@@ -12,7 +12,7 @@ gymApp.controller('DeleteWorkoutController', ['$scope','$http','$routeParams','g
 
 gymApp.directive('editworkout', ['$location',EditWorkout]);
 gymApp.directive('workoutExercises', ['$location',WorkoutExercises]);
-gymApp.directive('collapseWorkout', ['$location',CollapseWorkout]);
+//gymApp.directive('collapseWorkout', ['$location',CollapseWorkout]);
 
 function ListWorkoutController($scope,$http,globals) {
 
