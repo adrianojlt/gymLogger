@@ -99,10 +99,11 @@ function ListWorkoutController($scope,$http,globals) {
     	var start = tableState.pagination.start 	|| 0;  	// This is NOT the page number, but the index of item in the list that you want to use to display the table.
     	var count = tableState.pagination.number 	|| 10;	// Number of entries showed per page.
 
-    	var headers = { Range : start + '-' + count }
+    	var headers = { Range: start + '-' + count }
+    	var paramts = { offset: start , limit: count }
     	//console.log(headers,'headers');
 
-    	$http.get( globals.url + 'workouts' , { headers: headers } ).then( function(res) {
+    	$http.get( globals.url + 'workouts' , { headers: headers , params: paramts } ).then( function(res) {
 
 			$scope.workouts = res.data;
 

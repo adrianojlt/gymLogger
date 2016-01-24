@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import pt.adrz.gymlogger.dao.FactoryGym;
 import pt.adrz.gymlogger.dao.RepetitionDAO;
 import pt.adrz.gymlogger.dao.RepetitionDAOJDBC;
 import pt.adrz.gymlogger.dao.WorkoutDAO;
@@ -30,13 +32,15 @@ public class WorkoutService {
 	private RepetitionDAO repetitionsDAO;
 	
 	public WorkoutService() {
-		workoutsDAO = new WorkoutDAOJDBC();
+		workoutsDAO = FactoryGym.getWorkoutDAO(FactoryGym.STORAGE_TYPE.MYSQL_JDBC);
+		FactoryGym.getFactory(FactoryGym.STORAGE_TYPE.MYSQL_JDBC).getWorkoutDAO();
 		repetitionsDAO = new RepetitionDAOJDBC();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON) 
 	public List<Workout> getWorkouts(
+			@HeaderParam("Range") String range,
 			@QueryParam("offset") Integer offset, @QueryParam("limit") Integer limit,
 			@Context HttpHeaders header, @Context HttpServletResponse response) {
 		

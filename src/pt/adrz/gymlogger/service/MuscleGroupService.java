@@ -16,7 +16,7 @@ import pt.adrz.gymlogger.dao.MuscleGroupDAO;
 import pt.adrz.gymlogger.dao.MuscleGroupDAOJDBC;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
-@Path("/musclegroup")
+@Path("/groups")
 public class MuscleGroupService {
 	
 	private MuscleGroupDAO musclegroupDAO;
