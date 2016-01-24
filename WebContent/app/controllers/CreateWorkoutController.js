@@ -41,7 +41,7 @@ function CreateWorkoutController($scope,$window,$location,$http,$filter,globals)
   	};
 
 
-	$http.get( globals.url + 'groups' ).then(function(res) {
+	$http.get( globals.url + 'groups' , { headers: { exercises: true } } ).then(function(res) {
 		$scope.musclegroups = res.data;
 	});
 
