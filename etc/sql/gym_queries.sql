@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 use gymlogger;
 show tables;
 desc repetition;
@@ -111,6 +112,7 @@ SELECT id , MAX(weight) as max FROM repetition WHERE weight NOT IN (SELECT MAX(w
 SELECT id_exercise, e.name as ename, MAX(weight) FROM repetition  r
 LEFT JOIN exercise e on e.id = r.id_exercise
 GROUP BY id_exercise;
+
 
 
 
