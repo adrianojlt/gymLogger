@@ -4,6 +4,7 @@ public abstract class FactoryGym {
 
 	public enum STORAGE_TYPE {
 		MYSQL_JDBC,
+		MYSQL_JCABI,
 		MYSQL_SPRING_JDBC,
 		MYSQL_JPA,
 		MYSQL_HIBERNATE,
@@ -39,6 +40,8 @@ public abstract class FactoryGym {
 		
 			case MYSQL_JDBC:
 				return new ExerciseDAOJDBC();
+			case MYSQL_JCABI:
+				return new ExerciseDAOJCABI();
 			case MYSQL_SPRING_JDBC:
 				return null;
 			case ORACLE:

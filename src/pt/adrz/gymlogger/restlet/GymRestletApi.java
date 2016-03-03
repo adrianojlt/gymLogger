@@ -7,7 +7,7 @@ import org.restlet.routing.Router;
 import pt.adrz.gymlogger.restlet.filters.CustomHeaders;
 import pt.adrz.gymlogger.restlet.resources.*;
 
-public class GymApi extends Application {
+public class GymRestletApi extends Application {
 
 	@Override
 	public Restlet createInboundRoot() {

@@ -5,9 +5,9 @@ import org.restlet.data.Protocol;
 import org.restlet.routing.VirtualHost;
 
 
-public class GymMain {
+public class GymRestletMain {
 	
-	public GymMain() { }
+	public GymRestletMain() { }
 
 	public static void main(String[] args) throws Exception { 
 		
@@ -18,8 +18,8 @@ public class GymMain {
     	
     	VirtualHost host = c.getDefaultHost();
 
-    	GymApi gymApp = new GymApi();
-    	GymWeb gymWeb = new GymWeb();
+    	GymRestletApi gymApp = new GymRestletApi();
+    	GymRestletWeb gymWeb = new GymRestletWeb();
     	
     	host.attach("/api", gymApp);
     	host.attach("/api/v1", gymApp);

@@ -5,9 +5,9 @@ import org.restlet.Restlet;
 import org.restlet.resource.Directory;
 import org.restlet.routing.Router;
 
-public class GymWeb extends Application{
+public class GymRestletWeb extends Application{
 	
-	public GymWeb() {
+	public GymRestletWeb() {
 		
 	}
 

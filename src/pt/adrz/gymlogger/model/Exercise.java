@@ -40,4 +40,13 @@ public class Exercise implements Serializable {
 
 	public MuscleGroup getMuscleGroup() { return muscleGroup; }
 	public void setMuscleGroup(MuscleGroup muscleGroup) { this.muscleGroup = muscleGroup; }
+
+	@Override
+	public String toString() {
+		return "Exercise [id=" + id + ", name=" + name + ", nome=" + nome
+				+ ", muscleGroup=" + muscleGroup + ", repetitions="
+				+ repetitions + "]";
+	}
+	
+	
 }

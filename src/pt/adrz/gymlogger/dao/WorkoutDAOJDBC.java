@@ -23,8 +23,6 @@ import pt.adrz.gymlogger.model.Workout;
 
 public class WorkoutDAOJDBC implements WorkoutDAO {
 	
-	private static final String QUERY_GET_WORKOUTS = 
-		"SELECT id , start , end FROM " +  Database.WORKOUT.getTableName() + " ORDER BY id DESC";
 
 	private static final String QUERY_COUNT_WORKOUTS = 
 		"SELECT COUNT(*) FROM " + Database.WORKOUT.getTableName() + " ORDER BY id DESC";
@@ -518,34 +516,5 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		workout.setEnd(rs.getTimestamp(Workout.END));
 
 		return workout;
-	}
-	
-	public static void main(String[] args) {
-		
-		Outcome<Collection<String>> outcome =  new Outcome<Collection<String>>() {
-
-			@Override
-			public Collection<String> handle(ResultSet rset, Statement stmt) throws SQLException {
-				final Collection<String> names = new LinkedList<String>();
-	            while (rset.next()) {
-	              names.add(rset.getString(1));
-	            }
-	            return names;
-			}
-		};
-		
-		try {
-			Collection<String> names = new JdbcSession(ConnectionFactory.getConnection())
-				.sql("select name from exercise")
-				.select(outcome);
-			
-			for (String name : names) {
-				System.out.println(name);
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
