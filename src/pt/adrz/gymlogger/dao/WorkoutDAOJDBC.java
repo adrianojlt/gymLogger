@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pt.adrz.gymlogger.connection.ConnectionFactory;
+import pt.adrz.gymlogger.constants.Database;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 import pt.adrz.gymlogger.model.Repetition;
@@ -18,32 +19,34 @@ import pt.adrz.gymlogger.model.Workout;
 public class WorkoutDAOJDBC implements WorkoutDAO {
 	
 	private static final String QUERY_GET_WORKOUTS = 
-		"SELECT id , start , end FROM workout ORDER BY id DESC";
+		"SELECT id , start , end FROM " +  Database.WORKOUT.getTableName() + " ORDER BY id DESC";
 
 	private static final String QUERY_COUNT_WORKOUTS = 
-		"SELECT COUNT(*) FROM workout ORDER BY id DESC";
+		"SELECT COUNT(*) FROM " + Database.WORKOUT.getTableName() + " ORDER BY id DESC";
 
 	private static final String QUERY_GET_WORKOUTS_BY_ID = 
-		"SELECT id , start , end FROM workout WHERE id = ?;";
+		"SELECT id , start , end FROM " + Database.WORKOUT.getTableName() + " WHERE id = ?;";
 
 	private static final String QUERY_GET_ALL_WORKOUTS = 
 		"SELECT w.id AS wid, w.start, w.end, g.id AS gid, g.name AS gname, e.id AS eid, e.name AS ename, r.id AS rid, r.num, r.weight "
-		+ "FROM workout w "
-		+ "INNER JOIN repetition r ON r.id_workout = w.id "
-		+ "INNER JOIN exercise e ON e.id = r.id_exercise "
-		+ "INNER JOIN musclegroup g ON g.id = e.id_musclegroup "
+		+ "FROM " + Database.WORKOUT.getTableName() + " w "
+		+ "INNER JOIN " + Database.REPETITION.getTableName() + " r ON r.id_workout = w.id "
+		+ "INNER JOIN " + Database.EXERCISE.getTableName() + " e ON e.id = r.id_exercise "
+		+ "INNER JOIN " + Database.MUSCLEGROUP.getTableName() + " g ON g.id = e.id_musclegroup "
 		+ "ORDER BY wid DESC, rid ASC;";
 
 	private static final String QUERY_GET_GROUPS_FROM_WORKOUT = 
 		"SELECT g.id AS gid, g.name AS gname, e.id AS eid, e.name AS ename, r.id AS rid, r.num AS num, r.weight AS weight "
-		+ "FROM repetition r "
-		+ "INNER JOIN exercise e  		ON e.id = r.id_exercise "
-		+ "INNER JOIN musclegroup g  	ON g.id = e.id_musclegroup "
+		+ "FROM " + Database.REPETITION.getTableName() + " r "
+		+ "INNER JOIN " + Database.EXERCISE.getTableName() + " e  		ON e.id = r.id_exercise "
+		+ "INNER JOIN " + Database.MUSCLEGROUP.getTableName() + " g  	ON g.id = e.id_musclegroup "
 		+ "WHERE r.id_workout = ? "
 		+ "ORDER BY rid ASC;";
 
-	private static final String QUERY_INSERT_WORKOUT 	= "INSERT INTO Workout (id_User,start,end) VALUES (1,?,?);";
-	private static final String QUERY_INSERT_REPETITION = "INSERT INTO Repetition ( id_workout, id_exercise, weight, num ) VALUES (?,?,?,?);";
+	private static final String QUERY_INSERT_WORKOUT 	= 
+		"INSERT INTO " + Database.WORKOUT.getTableName() + " (id_User,start,end) VALUES (1,?,?);";
+	private static final String QUERY_INSERT_REPETITION = 
+		"INSERT INTO " + Database.REPETITION.getTableName() + " ( id_workout, id_exercise, weight, num ) VALUES (?,?,?,?);";
 
 	private int noOfRecords;
 	//private RepetitionDAO repetitionData;
