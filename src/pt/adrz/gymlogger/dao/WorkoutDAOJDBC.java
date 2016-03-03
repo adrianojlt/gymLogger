@@ -7,7 +7,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
+
+import com.jcabi.jdbc.JdbcSession;
+import com.jcabi.jdbc.Outcome;
 
 import pt.adrz.gymlogger.connection.ConnectionFactory;
 import pt.adrz.gymlogger.constants.Database;
@@ -513,5 +518,34 @@ public class WorkoutDAOJDBC implements WorkoutDAO {
 		workout.setEnd(rs.getTimestamp(Workout.END));
 
 		return workout;
+	}
+	
+	public static void main(String[] args) {
+		
+		Outcome<Collection<String>> outcome =  new Outcome<Collection<String>>() {
+
+			@Override
+			public Collection<String> handle(ResultSet rset, Statement stmt) throws SQLException {
+				final Collection<String> names = new LinkedList<String>();
+	            while (rset.next()) {
+	              names.add(rset.getString(1));
+	            }
+	            return names;
+			}
+		};
+		
+		try {
+			Collection<String> names = new JdbcSession(ConnectionFactory.getConnection())
+				.sql("select name from exercise")
+				.select(outcome);
+			
+			for (String name : names) {
+				System.out.println(name);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
