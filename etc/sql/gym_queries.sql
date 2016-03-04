@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 use gymlogger;
 show tables;
-desc repetition;
+desc exercise;
 
 select * from musclegroup;
 select * from exercise;
