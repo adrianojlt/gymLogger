@@ -20,12 +20,12 @@ public class GymMain {
 		
 		Collection<Exercise> exercises = exerciseDAO.getExercicesByMuscleGroupId(2);
 		
-		for (Exercise exercise : exercises) {
-			System.out.println(exercise);
-		}
+//		for (Exercise exercise : exercises) {
+//			System.out.println(exercise);
+//		}
 
-		//Exercise exercise = exerciseDAO.getExerciceById(102);
-		//System.out.println(exercise);
+		Exercise exercise = exerciseDAO.getExerciceById(102);
+		System.out.println(exercise);
 	
 	}
 }

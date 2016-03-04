@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import com.jcabi.jdbc.JdbcSession;
+import com.jcabi.jdbc.ListOutcome;
 import com.jcabi.jdbc.Outcome;
 
 import pt.adrz.gymlogger.connection.ConnectionFactory;
@@ -88,32 +89,21 @@ public class ExerciseDAOJCABI implements ExerciseDAO {
 
 		Collection<Exercise> exercises = null;
 
-		Outcome<Collection<Exercise>> outcome =  new Outcome<Collection<Exercise>>() {
-
-			@Override
-			public Collection<Exercise> handle(ResultSet rset, Statement stmt) throws SQLException {
-
-				final Collection<Exercise> exercises = new LinkedList<Exercise>();
-
-	            while (rset.next()) {
-
-	            	Exercise exercise = new Exercise();
-
-	            	exercise.setId(rset.getInt(1));
-	            	exercise.setName(rset.getString(2));
-	            	exercises.add(exercise);
-	            }
-
-	            return exercises;
-			}
-		};
-
 		try {
 
 			exercises = new JdbcSession(ConnectionFactory.getConnection())
 				.sql(SQL_QUERY_GET_BY_MUSCLEGROUPID)
 				.set(id)
-				.select(outcome);
+				.select(new ListOutcome<Exercise>(new ListOutcome.Mapping<Exercise>() {
+
+					@Override
+					public Exercise map(ResultSet rset) throws SQLException {
+						Exercise exercise = new Exercise();
+		            	exercise.setId(rset.getInt(1));
+		            	exercise.setName(rset.getString(2));
+						return exercise;
+					}
+				}));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
