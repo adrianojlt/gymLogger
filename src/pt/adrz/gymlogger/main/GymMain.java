@@ -2,8 +2,11 @@ package pt.adrz.gymlogger.main;
 
 import java.util.Collection;
 
+import pt.adrz.gymlogger.connection.ConnectionFactory;
 import pt.adrz.gymlogger.dao.ExerciseDAO;
 import pt.adrz.gymlogger.dao.FactoryGym;
+import pt.adrz.gymlogger.dao.jcabi.Exercises;
+import pt.adrz.gymlogger.dao.jcabi.MySqlExercises;
 import pt.adrz.gymlogger.model.Exercise;
 
 
@@ -12,6 +15,17 @@ public class GymMain {
 	public static void main(String[] args) {
 		
 		muscleGroup();
+		textNoORM();
+	}
+
+	public static void textNoORM() {
+
+		Exercises exercises = new MySqlExercises(ConnectionFactory.getDataSource());
+		
+		for (pt.adrz.gymlogger.dao.jcabi.Exercise exercise : exercises.iterate()) {
+			
+		}
+		
 	}
 	
 	private static void muscleGroup() {

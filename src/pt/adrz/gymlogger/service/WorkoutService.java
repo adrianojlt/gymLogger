@@ -19,9 +19,9 @@ import javax.ws.rs.core.Response;
 
 import pt.adrz.gymlogger.dao.FactoryGym;
 import pt.adrz.gymlogger.dao.RepetitionDAO;
-import pt.adrz.gymlogger.dao.RepetitionDAOJDBC;
 import pt.adrz.gymlogger.dao.WorkoutDAO;
-import pt.adrz.gymlogger.dao.WorkoutDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.RepetitionDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.WorkoutDAOJDBC;
 import pt.adrz.gymlogger.model.Repetition;
 import pt.adrz.gymlogger.model.Workout;
 

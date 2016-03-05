@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.dao;
+package pt.adrz.gymlogger.dao.jdbc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
 import pt.adrz.gymlogger.connection.ConnectionFactory;
+import pt.adrz.gymlogger.dao.MuscleGroupDAO;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 

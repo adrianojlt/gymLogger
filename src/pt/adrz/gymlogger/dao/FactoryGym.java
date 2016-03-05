@@ -1,5 +1,11 @@
 package pt.adrz.gymlogger.dao;
 
+import pt.adrz.gymlogger.dao.jcabi.ExerciseDAOJCABI;
+import pt.adrz.gymlogger.dao.jdbc.ExerciseDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.MuscleGroupDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.RepetitionDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.WorkoutDAOJDBC;
+
 public abstract class FactoryGym {
 
 	public enum STORAGE_TYPE {

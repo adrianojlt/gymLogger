@@ -1,5 +1,10 @@
 package pt.adrz.gymlogger.dao;
 
+import pt.adrz.gymlogger.dao.jdbc.ExerciseDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.MuscleGroupDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.RepetitionDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.WorkoutDAOJDBC;
+
 public class MysqlJdbcDAO extends FactoryGym {
 
 	@Override

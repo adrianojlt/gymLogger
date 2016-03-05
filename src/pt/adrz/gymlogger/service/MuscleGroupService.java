@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import pt.adrz.gymlogger.dao.ExerciseDAO;
 import pt.adrz.gymlogger.dao.FactoryGym;
 import pt.adrz.gymlogger.dao.MuscleGroupDAO;
-import pt.adrz.gymlogger.dao.MuscleGroupDAOJDBC;
+import pt.adrz.gymlogger.dao.jdbc.MuscleGroupDAOJDBC;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
 @Path("/groups")

@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.dao;
+package pt.adrz.gymlogger.dao.jcabi;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +11,7 @@ import com.jcabi.jdbc.ListOutcome;
 import com.jcabi.jdbc.Outcome;
 
 import pt.adrz.gymlogger.connection.ConnectionFactory;
+import pt.adrz.gymlogger.dao.ExerciseDAO;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 

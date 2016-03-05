@@ -1,4 +1,4 @@
-package pt.adrz.gymlogger.dao;
+package pt.adrz.gymlogger.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import pt.adrz.gymlogger.connection.ConnectionFactory;
+import pt.adrz.gymlogger.dao.ExerFactory;
 import pt.adrz.gymlogger.model.Exercise;
 import pt.adrz.gymlogger.model.MuscleGroup;
 
