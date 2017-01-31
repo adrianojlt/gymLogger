@@ -1,8 +1,8 @@
-
 USE gymlogger;
 DESC workout;
 
 RENAME TABLE exercice TO exercise;
+
 ALTER TABLE repetition CHANGE id_Exercice id_exercise int(11);
 ALTER TABLE repetition CHANGE id_Workout id_workout int(11);
 ALTER TABLE workout CHANGE id_User id_user int(11);

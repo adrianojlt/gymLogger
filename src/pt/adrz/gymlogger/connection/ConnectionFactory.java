@@ -12,6 +12,8 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
 public class ConnectionFactory {
 	
 	public static final String CONTEXT_STRING = "java:/comp/env";
@@ -34,7 +36,10 @@ public class ConnectionFactory {
 			src = (DataSource)ctx.lookup(DATASOURCE_NAME);
 		}
 		catch (NamingException eN) {
-			//eN.printStackTrace();
+			eN.printStackTrace();
+		}
+		catch (Exception eX) {
+			eX.printStackTrace();
 		}
 	}
 	
@@ -58,6 +63,15 @@ public class ConnectionFactory {
 		try {
 
 			if ( src == null ) { // conn to use without web server
+				
+				// use MySql directly
+				MysqlDataSource mysqlDataSource = new MysqlDataSource();
+				mysqlDataSource.setUser(USER);
+				mysqlDataSource.setPassword(PASS);
+				mysqlDataSource.setServerName("localhost");
+				mysqlDataSource.setDatabaseName(DATABASE);
+				src = mysqlDataSource;
+
 				conn = DriverManager.getConnection(DB_URL + DATABASE, USER, PASS);
 			}
 			else {
@@ -71,6 +85,11 @@ public class ConnectionFactory {
 	}
 	
 	public static DataSource getDataSource() {
+
+		if ( ConnectionFactory.instance == null ) { 
+			ConnectionFactory.instance = new ConnectionFactory(); 
+		}
+			
 		return src;
 	}
 	

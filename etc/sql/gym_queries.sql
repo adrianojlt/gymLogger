@@ -2,6 +2,7 @@ use gymlogger;
 show tables;
 desc exercise;
 
+select * from user;
 select * from musclegroup;
 select * from exercise;
 select * from repetition where id = 261;

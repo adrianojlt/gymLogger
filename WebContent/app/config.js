@@ -142,7 +142,6 @@ app.config(['$httpProvider',function($httpProvider) {
         };
 
         //console.log(myInterceptor);
-
         return myInterceptor;
     }]);
 }]);

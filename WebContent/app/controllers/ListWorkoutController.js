@@ -24,7 +24,7 @@ function ListWorkoutController($scope,$http,globals) {
 
 	})();
 
-	$scope.actions.delete = function($event) {
+	$scope.actions.remove = function($event) {
 		console.log($event);
 		//$event.preventDefault();
 	};

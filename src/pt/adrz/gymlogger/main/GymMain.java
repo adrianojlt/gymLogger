@@ -1,5 +1,6 @@
 package pt.adrz.gymlogger.main;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 import pt.adrz.gymlogger.connection.ConnectionFactory;
@@ -14,18 +15,23 @@ public class GymMain {
 	
 	public static void main(String[] args) {
 		
-		muscleGroup();
+		//muscleGroup();
 		textNoORM();
 	}
 
 	public static void textNoORM() {
 
+		try {
+			ConnectionFactory.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		Exercises exercises = new MySqlExercises(ConnectionFactory.getDataSource());
 		
 		for (pt.adrz.gymlogger.dao.jcabi.Exercise exercise : exercises.iterate()) {
-			
+			System.out.println(exercise.name());
 		}
-		
 	}
 	
 	private static void muscleGroup() {
